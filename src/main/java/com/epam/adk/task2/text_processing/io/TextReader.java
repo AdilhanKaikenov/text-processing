@@ -4,9 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Created on 23.10.2016.
@@ -23,10 +20,10 @@ public class TextReader implements Reader<String> {
 
         log.debug("Started to read file '{}', encoding - {}", fileName, charsetName);
 
-        Path path = Paths.get(fileName);
+        File file = new File(fileName);
 
-        if (!Files.exists(path)){
-            log.error("File - '{}' was not found.", path);
+        if (!file.exists()){
+            log.error("File - '{}' was not found.", file);
             throw new RuntimeException();
         }
 
@@ -34,7 +31,7 @@ public class TextReader implements Reader<String> {
         String line;
 
         try (BufferedReader in = new BufferedReader(new InputStreamReader(
-                new FileInputStream(path.toFile()), charsetName))){
+                new FileInputStream(file), charsetName))){
             while ((line = in.readLine()) != null){
                 sb.append(line).append("\n");
             }

@@ -25,7 +25,7 @@ public class TextProcessingApp {
 
         Reader<String> textReader = new TextReader();
         String text = textReader.read("text.txt", "utf-8");
-        log.info(text);
+        log.info("\n{}", text);
 
 /*
 

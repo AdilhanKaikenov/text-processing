@@ -1,5 +1,6 @@
 package com.epam.adk.task2.text_processing.io;
 
+import com.epam.adk.task2.text_processing.exception.ReadingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +17,7 @@ public class TextReader implements Reader<String> {
     private static final Logger log = LoggerFactory.getLogger(TextReader.class);
 
     @Override
-    public String read(String fileName, String charsetName) {
+    public String read(String fileName, String charsetName) throws ReadingException {
 
         log.debug("Started to read file '{}', encoding - {}", fileName, charsetName);
 
@@ -24,7 +25,7 @@ public class TextReader implements Reader<String> {
 
         if (!file.exists()){
             log.error("File - '{}' was not found.", file);
-            throw new RuntimeException();
+            throw new ReadingException();
         }
 
         StringBuilder sb = new StringBuilder();
@@ -37,7 +38,7 @@ public class TextReader implements Reader<String> {
             }
         } catch (IOException e) {
             log.error("Error reading file. {}", e);
-            throw new RuntimeException();
+            throw new ReadingException();
         }
         return sb.toString();
     }

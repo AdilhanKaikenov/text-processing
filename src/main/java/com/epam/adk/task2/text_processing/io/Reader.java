@@ -1,5 +1,7 @@
 package com.epam.adk.task2.text_processing.io;
 
+import com.epam.adk.task2.text_processing.exception.ReadingException;
+
 /**
  * Interface created on 23.10.2016.
  *
@@ -7,5 +9,5 @@ package com.epam.adk.task2.text_processing.io;
  */
 public interface Reader<T> {
 
-    T read(String fileName, String encoding);
+    T read(String fileName, String encoding) throws ReadingException;
 }

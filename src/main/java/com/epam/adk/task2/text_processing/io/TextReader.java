@@ -7,12 +7,12 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 
 /**
- * Created on 23.10.2016.
+ * TextReader class created on 23.10.2016.
  *
  * @author Kaikenov Adilhan.
  * @see Reader
  */
-public class TextReader implements Reader<String> {
+public final class TextReader implements Reader<String> {
 
     private static final Logger log = LoggerFactory.getLogger(TextReader.class);
 

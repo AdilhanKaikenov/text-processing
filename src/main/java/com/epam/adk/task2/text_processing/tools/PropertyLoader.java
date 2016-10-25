@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * PropertyLoader class created on 25.10.2016.
+ *
+ * @author Kaikenov Adilkhan
+ */
 public class PropertyLoader {
 
     private String nameProperty;

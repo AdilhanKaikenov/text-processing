@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created on 22.10.2016.
- * <p>
+ *
  * The class with main method.
  *
  * @author Kaikenov Adilhan.

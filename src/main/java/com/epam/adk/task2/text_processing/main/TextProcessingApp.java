@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Kaikenov Adilhan.
  */
-public class TextProcessingApp {
+public final class TextProcessingApp {
 
     private static final Logger log = LoggerFactory.getLogger(TextProcessingApp.class);
 

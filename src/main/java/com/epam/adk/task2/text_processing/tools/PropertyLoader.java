@@ -13,7 +13,7 @@ import java.util.Properties;
  *
  * @author Kaikenov Adilkhan
  */
-public class PropertyLoader {
+public final class PropertyLoader {
 
     private String nameProperty;
     private static final Logger log = LoggerFactory.getLogger(PropertyLoader.class);
@@ -22,7 +22,7 @@ public class PropertyLoader {
         this.nameProperty = nameProperty;
     }
 
-    public Properties getProps() throws PropertyPathException {
+    public Properties getProperties() throws PropertyPathException {
         Properties properties = new Properties();
         try (InputStream in = PropertyLoader.class.getClassLoader().getResourceAsStream(nameProperty)) {
             properties.load(in);

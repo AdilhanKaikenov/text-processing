@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.text.MessageFormat;
 
 /**
  * TextReader class created on 23.10.2016.
@@ -25,7 +26,7 @@ public final class TextReader implements Reader<String> {
 
         if (!file.exists()){
             log.error("File - '{}' was not found.", file);
-            throw new ReadingException();
+            throw new ReadingException(MessageFormat.format("File - {0} was not found.", file));
         }
 
         StringBuilder sb = new StringBuilder();
@@ -38,7 +39,7 @@ public final class TextReader implements Reader<String> {
             }
         } catch (IOException e) {
             log.error("Error reading file. {}", e);
-            throw new ReadingException();
+            throw new ReadingException(MessageFormat.format("Error reading file. {0}.", file));
         }
         return sb.toString();
     }

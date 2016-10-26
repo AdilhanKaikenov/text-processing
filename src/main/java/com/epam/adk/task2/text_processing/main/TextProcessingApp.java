@@ -1,5 +1,8 @@
 package com.epam.adk.task2.text_processing.main;
 
+import com.epam.adk.task2.text_processing.exception.ReadingException;
+import com.epam.adk.task2.text_processing.io.Reader;
+import com.epam.adk.task2.text_processing.io.TextReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,11 +22,11 @@ public final class TextProcessingApp {
      *
      * @param args input arguments array.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ReadingException {
 
-//        Reader<String> textReader = new TextReader();
-//        String text = textReader.read("text.txt", "utf-8");
-//        log.info("\n{}", text);
+        TextReader textReader = new TextReader();
+        String text = textReader.read("tex.txt", "utf-8");
+        log.info("\n{}", text);
 
 
 /*
@@ -40,7 +43,6 @@ public final class TextProcessingApp {
         TaskExecutor ...
 
  */
-
 
     }
 }

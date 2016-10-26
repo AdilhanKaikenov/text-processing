@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.MessageFormat;
 import java.util.Properties;
 
 /**
@@ -28,7 +29,7 @@ public final class PropertyLoader {
             properties.load(in);
         } catch (IOException e) {
             log.error("Invalid path to property file : {}", nameProperty);
-            throw new PropertyPathException();
+            throw new PropertyPathException(MessageFormat.format("Error reading file. {0}.", nameProperty));
         }
         return properties;
     }

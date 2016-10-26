@@ -6,9 +6,9 @@ package com.epam.adk.task2.text_processing.entity;
  * @author Kaikenov Adilkhan.
  * @see Composite
  * @see Leaf
- * @see SentenceElement
+ * @see SentenceComponent
  */
-public class Symbol implements Leaf, SentenceElement {
+public class Symbol implements Leaf, SentenceComponent {
 
     private char symbol;
 

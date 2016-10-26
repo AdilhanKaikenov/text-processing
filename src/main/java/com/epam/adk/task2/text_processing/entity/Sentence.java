@@ -6,6 +6,11 @@ package com.epam.adk.task2.text_processing.entity;
  * @author Kaikenov Adilkhan.
  * @see Composite
  */
-public class Sentence extends AbstractComposite<SentenceElement> {
+public class Sentence extends AbstractComposite<SentenceComponent> {
+
+    @Override
+    public String toString() {
+        return this.toSourceString();
+    }
 
 }

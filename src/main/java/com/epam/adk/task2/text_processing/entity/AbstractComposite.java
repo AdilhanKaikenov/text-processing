@@ -9,31 +9,31 @@ import java.util.List;
  * @author Kaikenov Adilhan.
  * @see Composite
  */
-public abstract class AbstractComposite<T extends Component> implements Composite<T> {
+public abstract class AbstractComposite<E extends Component> implements Composite<E> {
 
-    private List<T> components;
+    private List<E> components;
 
     public AbstractComposite() {
         components = new ArrayList<>();
     }
 
     @Override
-    public boolean add(T component) {
+    public boolean add(E component) {
         return components.add(component);
     }
 
     @Override
-    public boolean addAll(List<T> components) {
+    public boolean addAll(List<E> components) {
         return this.components.addAll(components);
     }
 
     @Override
-    public boolean remove(T component) {
+    public boolean remove(E component) {
         return components.remove(component);
     }
 
     @Override
-    public List<T> getComponents() {
+    public List<E> getComponents() {
         return new ArrayList<>(components);
     }
 
@@ -42,7 +42,7 @@ public abstract class AbstractComposite<T extends Component> implements Composit
         StringBuilder builder = new StringBuilder();
         for (Component component : components) {
             if (component != null) {
-                builder.append(component.toString());
+                builder.append(component.toSourceString());
             }
         }
         return builder.toString();
@@ -50,6 +50,6 @@ public abstract class AbstractComposite<T extends Component> implements Composit
 
     @Override
     public String toString() {
-        return toSourceString();
+        return this.toSourceString();
     }
 }

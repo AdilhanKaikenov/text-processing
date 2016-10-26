@@ -8,14 +8,14 @@ import java.util.List;
  * @author Kaikenov Adilkhan.
  * @see Component
  */
-public interface Composite<T extends Component> extends Component {
+public interface Composite<E extends Component> extends Component {
 
-    boolean add(T component);
+    boolean add(E component);
 
-    boolean addAll(List<T> component);
+    boolean addAll(List<E> component);
 
-    boolean remove(T component);
+    boolean remove(E component);
 
-    List<T> getComponents();
+    List<E> getComponents();
 
 }

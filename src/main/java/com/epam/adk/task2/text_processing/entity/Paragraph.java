@@ -10,6 +10,11 @@ public class Paragraph extends AbstractComposite<Sentence> {
 
     @Override
     public String toSourceString() {
-        return super.toString() + "\n";
+        return super.toSourceString() + "\n";
+    }
+
+    @Override
+    public String toString() {
+        return this.toSourceString();
     }
 }

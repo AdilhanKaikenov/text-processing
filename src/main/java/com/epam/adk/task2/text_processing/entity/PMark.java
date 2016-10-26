@@ -5,8 +5,13 @@ package com.epam.adk.task2.text_processing.entity;
  *
  * @author Kaikenov Adilkhan.
  * @see Composite
- * @see SentenceElement
+ * @see SentenceComponent
  */
-public class PMark extends AbstractComposite<Symbol> implements SentenceElement {
+public class PMark extends AbstractComposite<Symbol> implements SentenceComponent {
+
+    @Override
+    public String toString() {
+        return this.toSourceString();
+    }
 
 }

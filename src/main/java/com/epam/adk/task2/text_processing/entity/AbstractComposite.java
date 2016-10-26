@@ -38,7 +38,7 @@ public abstract class AbstractComposite<T extends Component> implements Composit
     }
 
     @Override
-    public String toString() {
+    public String toSourceString() {
         StringBuilder builder = new StringBuilder();
         for (Component component : components) {
             if (component != null) {
@@ -46,5 +46,10 @@ public abstract class AbstractComposite<T extends Component> implements Composit
             }
         }
         return builder.toString();
+    }
+
+    @Override
+    public String toString() {
+        return toSourceString();
     }
 }

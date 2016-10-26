@@ -17,7 +17,12 @@ public class Symbol implements Leaf, SentenceElement {
     }
 
     @Override
-    public String toString() {
+    public String toSourceString() {
         return String.valueOf(symbol);
+    }
+
+    @Override
+    public String toString() {
+        return toSourceString();
     }
 }

@@ -7,4 +7,6 @@ package com.epam.adk.task2.text_processing.entity;
  */
 public interface Component {
 
+    String toSourceString();
+
 }

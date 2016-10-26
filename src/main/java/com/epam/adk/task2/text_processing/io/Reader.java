@@ -7,7 +7,7 @@ import com.epam.adk.task2.text_processing.exception.ReadingException;
  *
  * @author Kaikenov Adilhan.
  */
-public interface Reader<T> {
+public interface Reader {
 
-    T read(String fileName, String encoding) throws ReadingException;
+    String read(String fileName, String encoding) throws ReadingException;
 }

@@ -13,7 +13,7 @@ import java.text.MessageFormat;
  * @author Kaikenov Adilhan.
  * @see Reader
  */
-public final class TextReader implements Reader<String> {
+public final class TextReader implements Reader {
 
     private static final Logger log = LoggerFactory.getLogger(TextReader.class);
 

@@ -22,6 +22,11 @@ public abstract class AbstractComposite<E extends Component> implements Composit
         return components.add(component);
     }
 
+    /**
+     * The method adds all components from another List of Components to the arrayList<Components> components.
+     *
+     * @param components List<Component> listComponents
+     */
     @Override
     public boolean addAll(List<E> components) {
         return this.components.addAll(components);
@@ -32,6 +37,9 @@ public abstract class AbstractComposite<E extends Component> implements Composit
         return components.remove(component);
     }
 
+    /**
+     * @return ArrayList<Component> components.
+     */
     @Override
     public List<E> getComponents() {
         return new ArrayList<>(components);

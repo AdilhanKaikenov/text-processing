@@ -35,6 +35,11 @@ public final class RegexTextParser implements Parser {
         componentClasses = loadComponentClasses();
     }
 
+    /**
+     * The method for initializing the Map<Class<Composite>, String> containing the regular expressions to parse the composites.
+     *
+     * @return map containing the regular expressions to parse the composites e.g. Text to Paragraph, Paragraph to Sentence etc.
+     */
     private static Map<Class<? extends Composite>, String> loadRegularExpressions() {
         regularExpressions.put(Text.class, properties.getProperty("textToParagraphRegex"));
         regularExpressions.put(Paragraph.class, properties.getProperty("paragraphToSentenceRegex"));
@@ -44,6 +49,11 @@ public final class RegexTextParser implements Parser {
         return regularExpressions;
     }
 
+    /**
+     * The method for initializing the Map<Class<Composite>, Class<Component>> containing the component classes.
+     *
+     * @return map containing the component classes of the composite classes.
+     */
     private static Map<Class<? extends Composite>, Class<? extends Component>> loadComponentClasses() {
         componentClasses.put(Text.class, Paragraph.class);
         componentClasses.put(Paragraph.class, Sentence.class);
@@ -89,6 +99,13 @@ public final class RegexTextParser implements Parser {
         }
     }
 
+    /**
+     * The method for determining a component of the sentence. Such as words and punctuation.
+     *
+     * @param matchedString string to define a specific component of the sentence.
+     * @return Component type (Word, PMark)
+     * @throws ParsingException
+     */
     private Component identifySentenceComponent(String matchedString) throws ParsingException {
         Component component = null;
 

@@ -9,6 +9,8 @@ import com.epam.adk.task2.text_processing.parse.RegexTextParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.regex.Pattern;
+
 /**
  * Created on 22.10.2016.
  *
@@ -20,6 +22,9 @@ public final class TextProcessingApp {
 
     private static final Logger log = LoggerFactory.getLogger(TextProcessingApp.class);
 
+    private static final int FILE_PATH = 0;
+    private static final int CHARSET = 1;
+
     /**
      * Application starting point.
      *
@@ -27,27 +32,23 @@ public final class TextProcessingApp {
      */
     public static void main(String[] args) throws ReadingException, PropertyPathException, ParsingException {
 
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Specify the file path and charset");
+        }
+
+        String pathParam = args[FILE_PATH];
+        String charsetName = args[CHARSET];
+
         TextReader textReader = new TextReader();
-        String text = textReader.read("text.txt", "utf-8");
+        String text = textReader.read(pathParam, charsetName);
 //        log.info("\n{}", text);
 
         RegexTextParser textParser = new RegexTextParser();
         Text parse = textParser.parse(text);
         System.out.println(parse.toString());
-/*
 
-        TextReader reader = new TextReader();
-        ... text = reader.read(pathParam, encoding);
-
-        Preparer preparer = new Preparer();
-        ... preparedText = preparer.prepareText(text);
-
-        Parser parse = new Parser();
-        Text parse = parse.parse(preparedText);
-
-        TaskExecutor ...
-
- */
+        Pattern compile = Pattern.compile("\\w+");
+//        Pattern compile = Pattern.compile("((^[\\p{Upper}])((\\s)?)([\\p{Alpha}\\p{Digit}]+))");
 
     }
 }

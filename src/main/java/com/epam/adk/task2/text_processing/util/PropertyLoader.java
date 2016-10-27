@@ -1,4 +1,4 @@
-package com.epam.adk.task2.text_processing.tools;
+package com.epam.adk.task2.text_processing.util;
 
 import com.epam.adk.task2.text_processing.exception.PropertyPathException;
 import org.slf4j.Logger;
@@ -16,8 +16,9 @@ import java.util.Properties;
  */
 public final class PropertyLoader {
 
-    private String nameProperty;
     private static final Logger log = LoggerFactory.getLogger(PropertyLoader.class);
+
+    private String nameProperty;
 
     public PropertyLoader(String nameProperty) {
         this.nameProperty = nameProperty;

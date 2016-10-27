@@ -3,7 +3,7 @@ package com.epam.adk.task2.text_processing.parse;
 import com.epam.adk.task2.text_processing.entity.*;
 import com.epam.adk.task2.text_processing.exception.ParsingException;
 import com.epam.adk.task2.text_processing.exception.PropertyPathException;
-import com.epam.adk.task2.text_processing.tools.PropertyLoader;
+import com.epam.adk.task2.text_processing.util.PropertyLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,11 +31,11 @@ public final class RegexTextParser implements Parser {
     public RegexTextParser() throws PropertyPathException {
         PropertyLoader regexLoader = new PropertyLoader("parser-regex.properties");
         properties = regexLoader.getProperties();
-        regularExpressions = loadRegularExpression();
+        regularExpressions = loadRegularExpressions();
         componentClasses = loadComponentClasses();
     }
 
-    private static Map<Class<? extends Composite>, String> loadRegularExpression() {
+    private static Map<Class<? extends Composite>, String> loadRegularExpressions() {
         regularExpressions.put(Text.class, properties.getProperty("textToParagraphRegex"));
         regularExpressions.put(Paragraph.class, properties.getProperty("paragraphToSentenceRegex"));
         regularExpressions.put(Sentence.class, properties.getProperty("sentenceToSentenceComponentRegex"));

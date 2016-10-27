@@ -13,6 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <slf4j-api.version>1.7.21</slf4j-api.version>
         <logback-classic.version>1.1.7</logback-classic.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <dependencies>
@@ -25,6 +26,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback-classic.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
         </dependency>
     </dependencies>
 

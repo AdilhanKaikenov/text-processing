@@ -9,8 +9,6 @@ import com.epam.adk.task2.text_processing.parse.RegexTextParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.regex.Pattern;
-
 /**
  * Created on 22.10.2016.
  *
@@ -39,16 +37,13 @@ public final class TextProcessingApp {
         String pathParam = args[FILE_PATH];
         String charsetName = args[CHARSET];
 
-        TextReader textReader = new TextReader();
-        String text = textReader.read(pathParam, charsetName);
-//        log.info("\n{}", text);
+        TextReader reader = new TextReader();
+        String sourceString = reader.read(pathParam, charsetName);
+        log.info("\n{}", sourceString);
 
         RegexTextParser textParser = new RegexTextParser();
-        Text parse = textParser.parse(text);
-        System.out.println(parse.toString());
-
-        Pattern compile = Pattern.compile("\\w+");
-//        Pattern compile = Pattern.compile("((^[\\p{Upper}])((\\s)?)([\\p{Alpha}\\p{Digit}]+))");
+        Text parsedText = textParser.parse(sourceString);
+        log.info("\n{}", parsedText);
 
     }
 }

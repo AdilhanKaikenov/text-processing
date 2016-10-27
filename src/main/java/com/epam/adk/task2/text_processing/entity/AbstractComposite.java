@@ -23,7 +23,7 @@ public abstract class AbstractComposite<E extends Component> implements Composit
     }
 
     /**
-     * The method adds all components from another List of Components to the arrayList<Components> components.
+     * The method adds all components from another List of Components to the List<Components> components.
      *
      * @param components List<Component> listComponents
      */

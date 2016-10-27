@@ -39,11 +39,11 @@ public final class TextProcessingApp {
 
         TextReader reader = new TextReader();
         String sourceString = reader.read(pathParam, charsetName);
-        log.info("\n{}", sourceString);
+        log.info("\nSource Text: {}", sourceString);
 
         RegexTextParser textParser = new RegexTextParser();
         Text parsedText = textParser.parse(sourceString);
-        log.info("\n{}", parsedText);
+        log.info("\nParsed Text: {}", parsedText);
 
     }
 }

@@ -18,19 +18,13 @@ public final class PropertyLoader {
 
     private static final Logger log = LoggerFactory.getLogger(PropertyLoader.class);
 
-    private String nameProperty;
-
-    public PropertyLoader(String nameProperty) {
-        this.nameProperty = nameProperty;
-    }
-
-    public Properties getProperties() throws PropertyPathException {
+    public Properties getProperties(String propertyName) throws PropertyPathException {
         Properties properties = new Properties();
-        try (InputStream in = PropertyLoader.class.getClassLoader().getResourceAsStream(nameProperty)) {
+        try (InputStream in = PropertyLoader.class.getClassLoader().getResourceAsStream(propertyName)) {
             properties.load(in);
         } catch (IOException e) {
-            log.error("Invalid path to property file : {}", nameProperty);
-            throw new PropertyPathException(MessageFormat.format("Error reading file. {0}.", nameProperty));
+            log.error("Invalid path to property file : {}", propertyName);
+            throw new PropertyPathException(MessageFormat.format("Error reading file. {0}.", propertyName));
         }
         return properties;
     }

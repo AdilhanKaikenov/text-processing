@@ -29,7 +29,7 @@ public class Word extends AbstractComposite<Symbol> implements SentenceComponent
         Properties properties = loader.getProperties(PARSER_REGEX_PROPERTIES);
         if (word.matches(properties.getProperty("word"))) {
             for (int i = 0; i < word.length(); i++) {
-                this.add(new Symbol(word.charAt(i)));
+                this.add(Symbol.of(word.charAt(i)));
             }
         } else {
             log.error(

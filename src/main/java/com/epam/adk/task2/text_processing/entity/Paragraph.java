@@ -11,10 +11,9 @@ import java.util.List;
 public class Paragraph extends AbstractComposite<Sentence> {
 
     @Override
-    public String toSourceString() {
+    public void toSourceString(StringBuilder builder) {
         int index = 0;
         List<Sentence> components = getComponents();
-        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < components.size(); i++) {
             index = i;
             Sentence sentence = components.get(i);
@@ -23,7 +22,6 @@ public class Paragraph extends AbstractComposite<Sentence> {
             }
         }
         builder.append((index != components.size()) ? "\n" : "");
-        return builder.toString();
     }
 
     @Override

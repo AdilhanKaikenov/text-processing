@@ -9,4 +9,6 @@ public interface Component {
 
     String toSourceString();
 
+    void toSourceString(StringBuilder builder);
+
 }

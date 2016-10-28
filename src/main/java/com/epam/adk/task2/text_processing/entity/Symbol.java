@@ -1,5 +1,8 @@
 package com.epam.adk.task2.text_processing.entity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Symbol class created on 23.10.2016.
  *
@@ -10,15 +13,50 @@ package com.epam.adk.task2.text_processing.entity;
  */
 public class Symbol implements Leaf, SentenceComponent {
 
-    private char symbol;
+    private static final Logger log = LoggerFactory.getLogger(Symbol.class);
 
-    public Symbol(char symbol) {
+    /**
+     * @param cache cache of symbols to store codes of ASCII symbols from 32 to 128.
+     */
+    private static final Symbol[] cache = new Symbol[127 + 1];
+    private Character symbol;
+
+    private Symbol(Character symbol) {
         this.symbol = symbol;
+    }
+
+    static {
+        for (int i = 32; i < cache.length; i++) {
+            cache[i] = new Symbol((char) i);
+        }
+        log.debug("Cache of symbols loaded. Cache length = {}.", cache.length);
+    }
+
+    /**
+     * Symbol Factory method.
+     *
+     * @param symbol char
+     * @return Symbol
+     */
+    public static Symbol of(char symbol) {
+
+        if (cache.length < (int) symbol) {
+            log.debug("Symbol '{}' is not present in the cache of symbols.", symbol);
+            return new Symbol(symbol);
+        } else {
+            return cache[symbol];
+        }
+
     }
 
     @Override
     public String toSourceString() {
         return String.valueOf(symbol);
+    }
+
+    @Override
+    public void toSourceString(StringBuilder builder) {
+        toSourceString();
     }
 
     @Override

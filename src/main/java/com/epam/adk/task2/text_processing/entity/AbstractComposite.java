@@ -48,12 +48,17 @@ public abstract class AbstractComposite<E extends Component> implements Composit
     @Override
     public String toSourceString() {
         StringBuilder builder = new StringBuilder();
+        toSourceString(builder);
+        return builder.toString();
+    }
+
+    @Override
+    public void toSourceString(StringBuilder builder) {
         for (Component component : components) {
             if (component != null) {
                 builder.append(component.toSourceString());
             }
         }
-        return builder.toString();
     }
 
     @Override

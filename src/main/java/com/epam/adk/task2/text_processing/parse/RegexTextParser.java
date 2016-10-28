@@ -18,34 +18,35 @@ import java.util.regex.Pattern;
  * RegexTextParser class created on 26.10.2016.
  *
  * @author Kaikenov Adilkhan.
- * @see Parser
+ * @see TextParser
  */
-public final class RegexTextParser implements Parser {
+public final class RegexTextParser implements TextParser {
 
     private static final Logger log = LoggerFactory.getLogger(RegexTextParser.class);
+    private static final String PARSER_REGEX_PROPERTIES = "parser-regex.properties";
 
     private static Properties properties;
-    private static Map<Class<? extends Composite>, String> regularExpressions = new HashMap<>();
+    private static PropertyLoader regexLoader = new PropertyLoader();
+    private static Map<Class<? extends Composite>, Pattern> regularExpressions = new HashMap<>();
     private static Map<Class<? extends Composite>, Class<? extends Component>> componentClasses = new HashMap<>();
 
     public RegexTextParser() throws PropertyPathException {
-        PropertyLoader regexLoader = new PropertyLoader("parser-regex.properties");
-        properties = regexLoader.getProperties();
+        properties = regexLoader.getProperties(PARSER_REGEX_PROPERTIES);
         regularExpressions = loadRegularExpressions();
         componentClasses = loadComponentClasses();
     }
 
     /**
-     * The method for initializing the Map<Class<Composite>, String> containing the regular expressions to parse the composites.
+     * The method for initializing the Map<Class<Composite>, String> containing the regular expressions to parseTo the composites.
      *
-     * @return map containing the regular expressions to parse the composites e.g. Text to Paragraph, Paragraph to Sentence etc.
+     * @return map containing the regular expressions to parseTo the composites e.g. Text to Paragraph, Paragraph to Sentence etc.
      */
-    private static Map<Class<? extends Composite>, String> loadRegularExpressions() {
-        regularExpressions.put(Text.class, properties.getProperty("textToParagraphRegex"));
-        regularExpressions.put(Paragraph.class, properties.getProperty("paragraphToSentenceRegex"));
-        regularExpressions.put(Sentence.class, properties.getProperty("sentenceToSentenceComponentRegex"));
-        regularExpressions.put(Word.class, properties.getProperty("wordToSymbolRegex"));
-        regularExpressions.put(PMark.class, properties.getProperty("pMarkToSymbolRegex"));
+    private static Map<Class<? extends Composite>, Pattern> loadRegularExpressions() {
+        regularExpressions.put(Text.class, Pattern.compile(properties.getProperty("textToParagraphRegex")));
+        regularExpressions.put(Paragraph.class, Pattern.compile(properties.getProperty("paragraphToSentenceRegex")));
+        regularExpressions.put(Sentence.class, Pattern.compile(properties.getProperty("sentenceToSentenceComponentRegex")));
+        regularExpressions.put(Word.class, Pattern.compile(properties.getProperty("wordToSymbolRegex")));
+        regularExpressions.put(PMark.class, Pattern.compile(properties.getProperty("pMarkToSymbolRegex")));
         return regularExpressions;
     }
 
@@ -65,37 +66,37 @@ public final class RegexTextParser implements Parser {
 
     @Override
     public Text parse(String source) throws ParsingException {
-        return parse(source, Text.class);
+        return parseTo(Text.class, source);
     }
 
     @Override
-    public <T extends Composite> T parse(String source, Class<T> compositeClass) throws ParsingException {
+    public <T extends Composite> T parseTo(Class<T> compositeClass, String source) throws ParsingException {
+        log.debug("Entering parseTo(): parse source string with length = '{}', to '{}'.", source.length(), compositeClass.getSimpleName());
         T composite;
         Class componentClass;
         try {
             composite = compositeClass.newInstance();
-            String regex = regularExpressions.get(composite.getClass());
             componentClass = componentClasses.get(compositeClass);
 
-            Pattern pattern = Pattern.compile(regex);
+            Pattern pattern = regularExpressions.get(composite.getClass());
             Matcher matcher = pattern.matcher(source);
             while (matcher.find()) {
                 String matchedString = matcher.group();
-                if (componentClass == SentenceComponent.class) {
+                if (componentClass.equals(SentenceComponent.class)) {
                     Component component = identifySentenceComponent(matchedString);
                     composite.add(component);
-                } else if (componentClass == Symbol.class) {
-                    Symbol symbol = new Symbol(matchedString.charAt(0));
+                } else if (componentClass.equals(Symbol.class)) {
+                    Symbol symbol = Symbol.of(matchedString.charAt(0));
                     composite.add(symbol);
                 } else {
-                    Composite component = parse(matchedString, componentClass);
+                    Composite component = parseTo(componentClass, matchedString);
                     composite.add(component);
                 }
             }
             return composite;
         } catch (Exception e) {
-            log.error("Error in parse method {}", e);
-            throw new ParsingException(MessageFormat.format("Error in parse method {0}.", e));
+            log.error("Error in parseTo method {}", e);
+            throw new ParsingException(MessageFormat.format("Error in parseTo method {0}.", e));
         }
     }
 
@@ -110,9 +111,9 @@ public final class RegexTextParser implements Parser {
         Component component = null;
 
         if (matchedString.matches(properties.getProperty("word"))) {
-            component = parse(matchedString, Word.class);
+            component = parseTo(Word.class, matchedString);
         } else if (matchedString.matches(properties.getProperty("pMark"))) {
-            component = parse(matchedString, PMark.class);
+            component = parseTo(PMark.class, matchedString);
         }
         return component;
     }

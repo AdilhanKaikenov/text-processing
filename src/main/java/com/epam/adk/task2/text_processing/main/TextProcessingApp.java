@@ -1,5 +1,6 @@
 package com.epam.adk.task2.text_processing.main;
 
+import com.epam.adk.task2.text_processing.entity.Symbol;
 import com.epam.adk.task2.text_processing.entity.Text;
 import com.epam.adk.task2.text_processing.entity.Word;
 import com.epam.adk.task2.text_processing.exception.ParsingException;
@@ -36,6 +37,11 @@ public final class TextProcessingApp {
      */
     public static void main(String[] args) throws ReadingException, PropertyPathException, ParsingException {
 
+        Symbol of = Symbol.of('п');
+
+        if (true){
+            return;
+        }
         if (args.length != 2) {
             throw new IllegalArgumentException("Specify the file path and charset");
         }

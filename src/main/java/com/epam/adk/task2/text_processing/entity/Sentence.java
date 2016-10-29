@@ -13,6 +13,7 @@ import java.util.List;
 public class Sentence extends AbstractTextComposite<SentenceComponent> {
 
     private SentenceComponentItr sentenceComponentItr;
+    private int numberOfWords;
 
     public Sentence() {
         sentenceComponentItr = new SentenceComponentItr();
@@ -50,6 +51,11 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
             }
         }
         return pMarks;
+    }
+
+    public int getNumberOfWords() {
+        numberOfWords = getWords().size();
+        return numberOfWords;
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.epam.adk.task2.text_processing.io.TextReader;
 import com.epam.adk.task2.text_processing.parse.RegexTextParser;
 import com.epam.adk.task2.text_processing.task.Task1;
 import com.epam.adk.task2.text_processing.task.Task10;
+import com.epam.adk.task2.text_processing.task.Task2;
 import com.epam.adk.task2.text_processing.util.TaskExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,6 +62,7 @@ public final class TextProcessingApp {
         TaskExecutor.performTask(
                 Arrays.asList(
                         new Task1(),
+                        new Task2(),
                         new Task10(words)
                 ),
                 parsedText);

@@ -27,12 +27,14 @@ public final class Task10 implements Task {
     @Override
     public void run(Text text) {
 
-        List<Word> words = text.getWords();
+        log.info("Task №10");
+
         Map<Word, Integer> result = new HashMap<>();
 
         for (Word word : wordList){
-            result.put(word, count(words, word));
+            result.put(word, count(text, word));
         }
+
         Map<Word, Integer> sorted = sort(result);
         print(sorted);
 
@@ -49,12 +51,16 @@ public final class Task10 implements Task {
      * The method for counting the word in a list words of sentence.
      *
      * @param sourceWord word.
-     * @param words all words in the sentence.
+     * @param text Text instance.
      * @return the number of specific word in the sentence.
      */
-    private int count(List<Word> words, Word sourceWord){
+    private int count(Text text, Word sourceWord){
         int count = 0;
-        for (Word word : words){
+
+        Iterator<Word> iterator = text.wordItr();
+
+        while (iterator.hasNext()){
+            Word word = iterator.next();
             if (word.equals(sourceWord)){
                 count++;
             }

@@ -19,8 +19,10 @@ public final class PropertyLoader {
     private static final Logger log = LoggerFactory.getLogger(PropertyLoader.class);
 
     public Properties getProperties(String propertyName) throws PropertyPathException {
+        log.debug("Entering getProperties: Property file name = '{}'", propertyName);
         Properties properties = new Properties();
         try (InputStream in = PropertyLoader.class.getClassLoader().getResourceAsStream(propertyName)) {
+            log.debug("Load {} file", propertyName);
             properties.load(in);
         } catch (IOException e) {
             log.error("Invalid path to property file : {}", propertyName);

@@ -37,9 +37,9 @@ public final class RegexTextParser implements TextParser {
     }
 
     /**
-     * The method for initializing the Map<Class<Composite>, String> containing the regular expressions to parseTo the composites.
+     * The method for initializing the Map<Class<Composite>, Pattern> containing the regular expressions to parse the composites.
      *
-     * @return map containing the regular expressions to parseTo the composites e.g. Text to Paragraph, Paragraph to Sentence etc.
+     * @return map containing the regular expressions to parse the composites e.g. Text to Paragraph, Paragraph to Sentence etc.
      */
     private static Map<Class<? extends Composite>, Pattern> loadRegularExpressions() {
         regularExpressions.put(Text.class, Pattern.compile(properties.getProperty("textToParagraphRegex")));
@@ -71,7 +71,7 @@ public final class RegexTextParser implements TextParser {
 
     @Override
     public <T extends Composite> T parseTo(Class<T> compositeClass, String source) throws ParsingException {
-        log.debug("Entering parseTo(): parse source string with length = '{}', to '{}'.", source.length(), compositeClass.getSimpleName());
+        log.trace("Entering parseTo(): parse source string with length = '{}', to '{}'.", source.length(), compositeClass.getSimpleName());
         T composite;
         Class componentClass;
         try {

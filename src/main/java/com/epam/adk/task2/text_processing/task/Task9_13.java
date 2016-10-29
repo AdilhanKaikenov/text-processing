@@ -1,8 +1,15 @@
 package com.epam.adk.task2.text_processing.task;
 
+import com.epam.adk.task2.text_processing.comparators.SorterByNumberOfLetters;
 import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.Word;
+import com.epam.adk.task2.text_processing.util.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 9.Все слова текста рассортировать по возрастанию количества заданной буквы в слове.
@@ -17,8 +24,41 @@ public final class Task9_13 implements Task{
 
     private static final Logger log = LoggerFactory.getLogger(Task9_13.class);
 
+    private Direction direction;
+    private char ch;
+
+    public Task9_13(char ch, Direction direction) {
+        this.ch = ch;
+        this.direction = direction;
+    }
+
     @Override
     public void run(Text text) {
+
+        log.info("Task #9 && #13");
+
+        List<Word> result = new ArrayList<>();
+
+        Iterator<Word> iterator = text.wordItr();
+        while (iterator.hasNext()){
+            result.add(iterator.next());
+        }
+
+        switch (direction){
+            case INCREASE:
+                result.sort(new SorterByNumberOfLetters(ch).reversed());
+                break;
+            case DECREASE:
+                result.sort(new SorterByNumberOfLetters(ch));
+                break;
+        }
+        Printer.print(result, true);
+
+    }
+
+    public enum Direction {
+
+        INCREASE, DECREASE
 
     }
 }

@@ -67,6 +67,7 @@ public final class TextProcessingApp {
                         new Task6(),
                         new Task7(),
                         new Task8(),
+                        new Task9_13('a', Task9_13.Direction.DECREASE),
                         new Task10(words)
                 ),
                 parsedText);

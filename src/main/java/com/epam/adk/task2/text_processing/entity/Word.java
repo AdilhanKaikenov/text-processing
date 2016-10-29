@@ -43,6 +43,16 @@ public class Word extends AbstractTextComposite<Symbol> implements SentenceCompo
         return getComponents().size();
     }
 
+    /**
+     * Wrapper method returns a word character at the specified index.
+     *
+     * @param index index of symbol which should be return.
+     * @return symbol of the word corresponding to the index.
+     */
+    public Character charAt(int index){
+        return this.toString().charAt(index);
+    }
+
     @Override
     public String toString() {
         return this.toSourceString();

@@ -4,7 +4,6 @@ import com.epam.adk.task2.text_processing.comparators.SorterByAlphabetically;
 import com.epam.adk.task2.text_processing.entity.Sentence;
 import com.epam.adk.task2.text_processing.entity.Text;
 import com.epam.adk.task2.text_processing.entity.Word;
-import com.epam.adk.task2.text_processing.util.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,8 +31,7 @@ public final class Task6 implements Task {
 
         Iterator<Sentence> iterator = text.sentenceItr();
         while (iterator.hasNext()){
-            List<Word> words = iterator.next().getWords();
-            result.addAll(words);
+            result.addAll(iterator.next().getWords());
         }
         result.sort(new SorterByAlphabetically());
 

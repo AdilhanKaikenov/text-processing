@@ -3,9 +3,6 @@ package com.epam.adk.task2.text_processing.entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Symbol class created on 23.10.2016.
  *

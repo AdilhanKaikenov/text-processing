@@ -66,6 +66,7 @@ public final class TextProcessingApp {
                         new Task5(),
                         new Task6(),
                         new Task7(),
+                        new Task8(),
                         new Task10(words)
                 ),
                 parsedText);

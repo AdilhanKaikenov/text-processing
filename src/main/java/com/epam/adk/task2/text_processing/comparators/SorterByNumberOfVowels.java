@@ -17,14 +17,14 @@ import java.util.Properties;
 public class SorterByNumberOfVowels implements Comparator<Word> {
 
     private static final Logger log = LoggerFactory.getLogger(SorterByNumberOfVowels.class);
+    private static final String PARSER_REGEX_PROPERTIES = "parser-regex.properties";
 
     private Properties properties;
-    private PropertyLoader loader = new PropertyLoader();
 
     public SorterByNumberOfVowels() {
         if (properties == null){
             try {
-                properties = loader.getProperties("parser-regex.properties");
+                properties = new PropertyLoader().getProperties(PARSER_REGEX_PROPERTIES);
             } catch (PropertyPathException e) {
                 log.error("Error in SorterByNumberOfVowels() constrictor: {}", e);
             }

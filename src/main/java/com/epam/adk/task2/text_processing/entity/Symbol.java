@@ -3,6 +3,9 @@ package com.epam.adk.task2.text_processing.entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Symbol class created on 23.10.2016.
  *
@@ -16,41 +19,33 @@ public class Symbol implements Leaf, SentenceComponent {
     private static final Logger log = LoggerFactory.getLogger(Symbol.class);
 
     /**
-     * @param cache cache of symbols to store codes of ASCII symbols from 32 to 128.
+     * @param cache cache of symbols.
      */
-    private static final Symbol[] cache = new Symbol[127 + 1];
+    private static Map<Character, Symbol> cache;
     private Character symbol;
 
     private Symbol(Character symbol) {
         this.symbol = symbol;
     }
 
-    static {
-        loadCache();
-    }
-
-    private static void loadCache(){
-        for (int i = 32; i < cache.length; i++) {
-            cache[i] = new Symbol((char) i);
-        }
-        log.debug("Cache of symbols loaded. Cache length = {}.", cache.length);
-    }
-
     /**
      * Symbol Factory method.
      *
-     * @param symbol char
+     * @param ch char
      * @return Symbol
      */
-    public static Symbol of(char symbol) {
+    public static Symbol of(char ch) {
 
-        if (cache.length < (int) symbol) {
-            log.debug("Symbol '{}' is not present in the cache of symbols.", symbol);
-            return new Symbol(symbol);
-        } else {
-            return cache[symbol];
+        if (cache == null) {
+            cache = new HashMap<>();
         }
 
+        Symbol symbol = cache.get(ch);
+
+        if (symbol == null) {
+            cache.put(ch, new Symbol(ch));
+        }
+        return symbol;
     }
 
     @Override

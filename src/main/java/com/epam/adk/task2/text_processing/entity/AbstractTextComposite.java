@@ -42,6 +42,11 @@ public abstract class AbstractTextComposite<E extends TextComponent> implements 
         return components.get(index);
     }
 
+    @Override
+    public E set(int index, E element) {
+        return components.set(index, element);
+    }
+
     /**
      * @return ArrayList<TextComponent> components.
      */

@@ -1,11 +1,15 @@
 package com.epam.adk.task2.text_processing.util;
 
-import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.TextComponent;
 import com.epam.adk.task2.text_processing.entity.TextComposite;
+import com.epam.adk.task2.text_processing.entity.Text;
+import com.sun.xml.internal.ws.api.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Printer class Created on 29.10.2016.
@@ -53,9 +57,9 @@ public class Printer {
     /**
      * The method for displaying text.
      *
-     * @param text text to be displayed to the console.
+     * @param component component to be displayed to the console.
      */
-    public static void print(Text text) {
-        log.info(text.toSourceString());
+    public static void print(TextComponent component) {
+        log.info(component.toSourceString());
     }
 }

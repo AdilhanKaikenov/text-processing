@@ -40,7 +40,6 @@ public final class Task4 implements Task {
                 }
             }
 
-        log.debug("{}", interrogativeSentences.size());
         Set<Word> wordSet = new HashSet<>();
         wordSet.addAll(giveWordsOfTheSpecifiedLength(interrogativeSentences));
 

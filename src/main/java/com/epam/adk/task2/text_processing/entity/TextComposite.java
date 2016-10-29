@@ -18,6 +18,8 @@ public interface TextComposite<E extends TextComponent> extends TextComponent {
 
     E get(int index);
 
+    E set(int index, E element);
+
     List<E> getComponents();
 
 }

@@ -53,6 +53,42 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
         return pMarks;
     }
 
+    /**
+     * The method returns the first word of the sentence.
+     *
+     * @return the first word of the sentence.
+     */
+    public Word getFirstWord() {
+        int index = 0;
+        while (true) {
+            SentenceComponent sentenceElement = this.get(index);
+            if (sentenceElement != null && sentenceElement.getClass() == Word.class) {
+                break;
+            } else {
+                index++;
+            }
+        }
+        return (Word) this.get(index);
+    }
+
+    /**
+     * The method returns the last word of the sentence.
+     *
+     * @return the last word of the sentence.
+     */
+    public Word getLastWord() {
+        int index = getComponents().size() - 1;
+        while (true) {
+            SentenceComponent sentenceElement = this.get(index);
+            if (sentenceElement != null && sentenceElement.getClass() == Word.class) {
+                break;
+            } else {
+                index--;
+            }
+        }
+        return (Word) this.get(index);
+    }
+
     public int getNumberOfWords() {
         numberOfWords = getWords().size();
         return numberOfWords;

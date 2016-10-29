@@ -39,6 +39,10 @@ public class Word extends AbstractTextComposite<Symbol> implements SentenceCompo
         }
     }
 
+    public int length(){
+        return getComponents().size();
+    }
+
     @Override
     public String toString() {
         return this.toSourceString();

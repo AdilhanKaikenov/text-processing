@@ -9,9 +9,21 @@ package com.epam.adk.task2.text_processing.entity;
  */
 public class PMark extends AbstractTextComposite<Symbol> implements SentenceComponent {
 
+    public PMark() {
+    }
+
+    public PMark(Symbol symbol){
+        this.add(symbol);
+    }
+
     @Override
     public String toString() {
         return this.toSourceString();
+    }
+
+    @Override
+    public int hashCode() {
+        return getComponents() != null ? getComponents().hashCode() : 0;
     }
 
 }

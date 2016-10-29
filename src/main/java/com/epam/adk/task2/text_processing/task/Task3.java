@@ -8,10 +8,7 @@ import com.epam.adk.task2.text_processing.util.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 3.Найти такое слово в первом предложении, которого нет ни в одном из остальных предложений.
@@ -30,8 +27,8 @@ public final class Task3 implements Task {
 
         List<Word> result = new ArrayList<>();
 
-        List<Paragraph> components = text.getComponents();
-        Paragraph sentences = components.get(0);
+        Iterator<Paragraph> iterator = text.paragraphItr();
+        Paragraph sentences = iterator.next();
         Sentence firstSentence = sentences.get(0);
         sentences.remove(firstSentence); //remove first sentence
 

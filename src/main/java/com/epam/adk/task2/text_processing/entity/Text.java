@@ -62,7 +62,6 @@ public class Text extends AbstractTextComposite<Paragraph> {
 
 
     private class ParagraphItr implements ComponentIterable<Paragraph> {
-
         @Override
         public Iterator<Paragraph> iterator() {
             return getComponents().iterator();
@@ -70,7 +69,6 @@ public class Text extends AbstractTextComposite<Paragraph> {
     }
 
     private class SentenceItr implements ComponentIterable<Sentence> {
-
         @Override
         public Iterator<Sentence> iterator() {
             return getSentences().iterator();
@@ -78,7 +76,6 @@ public class Text extends AbstractTextComposite<Paragraph> {
     }
 
     private class WordItr implements ComponentIterable<Word> {
-
         @Override
         public Iterator<Word> iterator() {
             return getWords().iterator();

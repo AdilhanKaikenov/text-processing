@@ -41,7 +41,7 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
      *
      * @return List<PMark> punctuationMarksList.
      */
-    public List<PMark> getPMars() {
+    public List<PMark> getPMarks() {
         List<PMark> pMarks = new ArrayList<>();
         Iterator<SentenceComponent> iterator = sentenceComponentIterator();
         while (iterator.hasNext()){

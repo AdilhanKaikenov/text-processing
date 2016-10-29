@@ -92,7 +92,7 @@ public abstract class AbstractComposite<E extends Component> implements Composit
      *
      * @param <E> <E extends Component>
      */
-    public abstract class CompositeIterator<E extends Component> implements Iterable<E> {
+    public interface ComponentIterable<E extends Component> extends Iterable<E> {
 
     }
 }

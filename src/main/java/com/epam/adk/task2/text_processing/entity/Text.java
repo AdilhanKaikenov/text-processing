@@ -65,7 +65,7 @@ public class Text extends AbstractComposite<Paragraph> {
     }
 
 
-    private class ParagraphItr extends CompositeIterator<Paragraph> {
+    private class ParagraphItr implements ComponentIterable<Paragraph> {
 
         @Override
         public Iterator<Paragraph> iterator() {
@@ -73,7 +73,7 @@ public class Text extends AbstractComposite<Paragraph> {
         }
     }
 
-    private class SentenceItr extends CompositeIterator<Sentence> {
+    private class SentenceItr implements ComponentIterable<Sentence> {
 
         @Override
         public Iterator<Sentence> iterator() {
@@ -81,7 +81,7 @@ public class Text extends AbstractComposite<Paragraph> {
         }
     }
 
-    private class WordItr extends CompositeIterator<Word> {
+    private class WordItr implements ComponentIterable<Word> {
 
         @Override
         public Iterator<Word> iterator() {

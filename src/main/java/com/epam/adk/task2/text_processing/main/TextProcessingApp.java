@@ -1,7 +1,5 @@
 package com.epam.adk.task2.text_processing.main;
 
-import com.epam.adk.task2.text_processing.entity.PMark;
-import com.epam.adk.task2.text_processing.entity.Symbol;
 import com.epam.adk.task2.text_processing.entity.Text;
 import com.epam.adk.task2.text_processing.entity.Word;
 import com.epam.adk.task2.text_processing.exception.ParsingException;
@@ -14,7 +12,6 @@ import com.epam.adk.task2.text_processing.util.TaskExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -67,6 +64,7 @@ public final class TextProcessingApp {
                         new Task3(),
                         new Task4(4,5),
                         new Task5(),
+                        new Task6(),
                         new Task10(words)
                 ),
                 parsedText);

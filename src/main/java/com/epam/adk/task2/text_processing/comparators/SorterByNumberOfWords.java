@@ -8,7 +8,6 @@ import java.util.Comparator;
  * SorterByNumberOfWords class Created on 29.10.2016.
  *
  * @author Kaikenov Adilkhan
- * @version 1.0
  */
 public class SorterByNumberOfWords implements Comparator<Sentence> {
 

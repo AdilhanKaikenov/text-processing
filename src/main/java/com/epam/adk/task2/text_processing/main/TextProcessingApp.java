@@ -1,6 +1,7 @@
 package com.epam.adk.task2.text_processing.main;
 
-import com.epam.adk.task2.text_processing.entity.*;
+import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.Word;
 import com.epam.adk.task2.text_processing.exception.ParsingException;
 import com.epam.adk.task2.text_processing.exception.PropertyPathException;
 import com.epam.adk.task2.text_processing.exception.ReadingException;
@@ -13,9 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Created on 22.10.2016.
@@ -52,11 +51,6 @@ public final class TextProcessingApp {
         RegexTextParser textParser = new RegexTextParser();
         Text parsedText = textParser.parse(sourceString);
         log.info("\nPARSED TEXT: {}", parsedText);
-
-        Iterator<Sentence> iterator = parsedText.sentenceItr();
-        while (iterator.hasNext()){
-            System.out.println(iterator.next());
-        }
 
         List<Word> words = Arrays.asList(
                 new Word("Nulla"),

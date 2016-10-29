@@ -1,20 +1,20 @@
 package com.epam.adk.task2.text_processing.util;
 
-import com.epam.adk.task2.text_processing.entity.TextComposite;
 import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.TextComposite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
- * TextCompositePrinter class Created on 08.11.2015.
+ * Printer class Created on 29.10.2016.
  *
  * @author Kaikenov Adilkhan
  */
-public class TextCompositePrinter {
+public class Printer {
 
-    private static final Logger log = LoggerFactory.getLogger(TextCompositePrinter.class);
+    private static final Logger log = LoggerFactory.getLogger(Printer.class);
 
     /**
      * The method for displaying list of composite as a numbered.
@@ -23,13 +23,13 @@ public class TextCompositePrinter {
      * @param numbered boolean true for numbering, false for not.
      * @param <E>      type parameterization.
      */
-    public static <E extends TextComposite> void print(List<E> list, boolean numbered) {
+    public static <E extends TextComposite> void print(Collection<E> list, boolean numbered) {
         if (!list.isEmpty() && numbered) {
             int i = 1;
             for (TextComposite composite : list) {
                 log.info("{}){}", i++, composite.toString().trim());
             }
-            System.out.println();
+            log.info("");
         } else {
             print(list);
         }
@@ -41,12 +41,12 @@ public class TextCompositePrinter {
      * @param list list of composite.
      * @param <E>  type parameterization.
      */
-    public static <E extends TextComposite> void print(List<E> list) {
+    public static <E extends TextComposite> void print(Collection<E> list) {
         if (!list.isEmpty()) {
             for (TextComposite composite : list) {
                 log.info(composite.toString().trim());
             }
-            System.out.println();
+            log.info("");
         }
     }
 
@@ -56,6 +56,6 @@ public class TextCompositePrinter {
      * @param text text to be displayed to the console.
      */
     public static void print(Text text) {
-        System.out.println(text);
+        log.info(text.toSourceString());
     }
 }

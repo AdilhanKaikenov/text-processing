@@ -26,6 +26,10 @@ public class Symbol implements Leaf, SentenceComponent {
     }
 
     static {
+        loadCache();
+    }
+
+    private static void loadCache(){
         for (int i = 32; i < cache.length; i++) {
             cache[i] = new Symbol((char) i);
         }

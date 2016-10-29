@@ -1,7 +1,6 @@
 package com.epam.adk.task2.text_processing.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Abstract class AbstractComposite created on 23.10.2016.
@@ -9,9 +8,10 @@ import java.util.List;
  * @author Kaikenov Adilhan.
  * @see Composite
  */
-public abstract class AbstractComposite<E extends Component> implements Composite<E> {
+public abstract class AbstractComposite<E extends Component> implements Composite<E>, Iterable<E> {
 
     private List<E> components;
+
 
     public AbstractComposite() {
         components = new ArrayList<>();
@@ -67,6 +67,11 @@ public abstract class AbstractComposite<E extends Component> implements Composit
     }
 
     @Override
+    public Iterator<E> iterator() {
+        return components.iterator();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -80,5 +85,14 @@ public abstract class AbstractComposite<E extends Component> implements Composit
     @Override
     public int hashCode() {
         return components != null ? components.hashCode() : 0;
+    }
+
+    /**
+     * Inner Abstract class CompositeIterator.
+     *
+     * @param <E> <E extends Component>
+     */
+    public abstract class CompositeIterator<E extends Component> implements Iterable<E> {
+
     }
 }

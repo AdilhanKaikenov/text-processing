@@ -1,6 +1,7 @@
 package com.epam.adk.task2.text_processing.entity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -11,13 +12,14 @@ import java.util.List;
  */
 public class Text extends AbstractComposite<Paragraph> {
 
-    /**
-     * The method returns all the paragraphs of the text.
-     *
-     * @return List<Paragraph> paragraphsList.
-     */
-    public List<Paragraph> getParagraphs() {
-        return super.getComponents();
+    private ParagraphItr paragraphItr;
+    private SentenceItr sentenceItr;
+    private WordItr wordItr;
+
+    public Text() {
+        paragraphItr = new ParagraphItr();
+        sentenceItr = new SentenceItr();
+        wordItr = new WordItr();
     }
 
     /**
@@ -25,9 +27,9 @@ public class Text extends AbstractComposite<Paragraph> {
      *
      * @return List<Sentence> sentencesList
      */
-    public List<Sentence> getSentences(){
+    private List<Sentence> getSentences() {
         List<Sentence> sentences = new ArrayList<>();
-        for (Paragraph paragraph : this.getParagraphs()){
+        for (Paragraph paragraph : this.getComponents()) {
             sentences.addAll(paragraph.getComponents());
         }
         return sentences;
@@ -38,15 +40,52 @@ public class Text extends AbstractComposite<Paragraph> {
      *
      * @return List<Word> wordsList.
      */
-    public List<Word> getWords(){
+    private List<Word> getWords() {
         List<Word> words = new ArrayList<>();
-        for (Sentence sentence : this.getSentences()){
-            for (Component component : sentence.getComponents()){
-                if (component != null && component.getClass() == Word.class){
+        for (Sentence sentence : this.getSentences()) {
+            for (Component component : sentence.getComponents()) {
+                if (component != null && component.getClass() == Word.class) {
                     words.add((Word) component);
                 }
             }
         }
         return words;
+    }
+
+    public Iterator<Paragraph> paragraphItr() {
+        return paragraphItr.iterator();
+    }
+
+    public Iterator<Sentence> sentenceItr() {
+        return sentenceItr.iterator();
+    }
+
+    public Iterator<Word> wordItr() {
+        return wordItr.iterator();
+    }
+
+
+    private class ParagraphItr extends CompositeIterator<Paragraph> {
+
+        @Override
+        public Iterator<Paragraph> iterator() {
+            return getComponents().iterator();
+        }
+    }
+
+    private class SentenceItr extends CompositeIterator<Sentence> {
+
+        @Override
+        public Iterator<Sentence> iterator() {
+            return getSentences().iterator();
+        }
+    }
+
+    private class WordItr extends CompositeIterator<Word> {
+
+        @Override
+        public Iterator<Word> iterator() {
+            return getWords().iterator();
+        }
     }
 }

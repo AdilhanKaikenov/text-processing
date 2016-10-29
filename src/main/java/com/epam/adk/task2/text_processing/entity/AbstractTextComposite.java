@@ -37,6 +37,11 @@ public abstract class AbstractTextComposite<E extends TextComponent> implements 
         return components.remove(component);
     }
 
+    @Override
+    public E get(int index) {
+        return components.get(index);
+    }
+
     /**
      * @return ArrayList<TextComponent> components.
      */

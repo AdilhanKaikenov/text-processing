@@ -10,6 +10,7 @@ import com.epam.adk.task2.text_processing.parse.RegexTextParser;
 import com.epam.adk.task2.text_processing.task.Task1;
 import com.epam.adk.task2.text_processing.task.Task10;
 import com.epam.adk.task2.text_processing.task.Task2;
+import com.epam.adk.task2.text_processing.task.Task3;
 import com.epam.adk.task2.text_processing.util.TaskExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,7 @@ public final class TextProcessingApp {
                 Arrays.asList(
                         new Task1(),
                         new Task2(),
+                        new Task3(),
                         new Task10(words)
                 ),
                 parsedText);

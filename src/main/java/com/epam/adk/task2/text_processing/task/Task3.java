@@ -1,8 +1,17 @@
 package com.epam.adk.task2.text_processing.task;
 
+import com.epam.adk.task2.text_processing.entity.Paragraph;
+import com.epam.adk.task2.text_processing.entity.Sentence;
 import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.Word;
+import com.epam.adk.task2.text_processing.util.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 3.Найти такое слово в первом предложении, которого нет ни в одном из остальных предложений.
@@ -17,5 +26,46 @@ public final class Task3 implements Task {
     @Override
     public void run(Text text) {
 
+        log.info("Task #3");
+
+        List<Word> result = new ArrayList<>();
+
+        List<Paragraph> components = text.getComponents();
+        Paragraph sentences = components.get(0);
+        Sentence firstSentence = sentences.get(0);
+        sentences.remove(firstSentence); //remove first sentence
+
+        Set<Word> wordSet = new HashSet<>();
+        List<Word> words = firstSentence.getWords();
+
+        if (!words.isEmpty()) {
+            wordSet.addAll(words);
+        }
+
+        for (Word word : wordSet) {
+            if (isWordContains(word, sentences.getComponents())) {
+                result.add(word);
+            }
+        }
+
+        if (!result.isEmpty()) {
+            log.info("These words aren't present in other sentences:");
+            Printer.print(result, true);
+        } else {
+            log.info("<!> In the first sentence, there is no unique words. <!>\n");
+        }
+    }
+
+
+    private boolean isWordContains(Word word, List<Sentence> sentences) {
+        for (Sentence sentence : sentences) {
+            List<Word> words = sentence.getWords();
+            for (Word w : words) {
+                if (word.equals(w)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

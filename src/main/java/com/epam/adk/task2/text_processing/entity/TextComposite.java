@@ -16,6 +16,8 @@ public interface TextComposite<E extends TextComponent> extends TextComponent {
 
     boolean remove(E component);
 
+    E get(int index);
+
     List<E> getComponents();
 
 }

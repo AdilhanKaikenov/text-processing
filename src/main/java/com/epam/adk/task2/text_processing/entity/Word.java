@@ -12,10 +12,10 @@ import java.util.Properties;
  * Word class created on 23.10.2016.
  *
  * @author Kaikenov Adilkhan.
- * @see Composite
+ * @see TextComposite
  * @see SentenceComponent
  */
-public class Word extends AbstractComposite<Symbol> implements SentenceComponent {
+public class Word extends AbstractTextComposite<Symbol> implements SentenceComponent {
 
     private static final Logger log = LoggerFactory.getLogger(Word.class);
     private static final String PARSER_REGEX_PROPERTIES = "parser-regex.properties";

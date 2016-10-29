@@ -6,9 +6,9 @@ import java.util.List;
  * Paragraph class created on 23.10.2016.
  *
  * @author Kaikenov Adilkhan.
- * @see Composite
+ * @see TextComposite
  */
-public class Paragraph extends AbstractComposite<Sentence> {
+public class Paragraph extends AbstractTextComposite<Sentence> {
 
     @Override
     public void toSourceString(StringBuilder builder) {

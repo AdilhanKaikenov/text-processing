@@ -3,17 +3,17 @@ package com.epam.adk.task2.text_processing.entity;
 import java.util.*;
 
 /**
- * Abstract class AbstractComposite created on 23.10.2016.
+ * Abstract class AbstractTextComposite created on 23.10.2016.
  *
  * @author Kaikenov Adilhan.
- * @see Composite
+ * @see TextComposite
  */
-public abstract class AbstractComposite<E extends Component> implements Composite<E>, Iterable<E> {
+public abstract class AbstractTextComposite<E extends TextComponent> implements TextComposite<E>, Iterable<E> {
 
     private List<E> components;
 
 
-    public AbstractComposite() {
+    public AbstractTextComposite() {
         components = new ArrayList<>();
     }
 
@@ -25,7 +25,7 @@ public abstract class AbstractComposite<E extends Component> implements Composit
     /**
      * The method adds all components from another List of Components to the List<Components> components.
      *
-     * @param components List<Component> listComponents
+     * @param components List<TextComponent> listComponents
      */
     @Override
     public boolean addAll(List<E> components) {
@@ -38,7 +38,7 @@ public abstract class AbstractComposite<E extends Component> implements Composit
     }
 
     /**
-     * @return ArrayList<Component> components.
+     * @return ArrayList<TextComponent> components.
      */
     @Override
     public List<E> getComponents() {
@@ -54,7 +54,7 @@ public abstract class AbstractComposite<E extends Component> implements Composit
 
     @Override
     public void toSourceString(StringBuilder builder) {
-        for (Component component : components) {
+        for (TextComponent component : components) {
             if (component != null) {
                 builder.append(component.toSourceString());
             }
@@ -76,7 +76,7 @@ public abstract class AbstractComposite<E extends Component> implements Composit
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AbstractComposite<?> that = (AbstractComposite<?>) o;
+        AbstractTextComposite<?> that = (AbstractTextComposite<?>) o;
 
         return components != null ? components.equals(that.components) : that.components == null;
 
@@ -90,9 +90,9 @@ public abstract class AbstractComposite<E extends Component> implements Composit
     /**
      * Inner Abstract class CompositeIterator.
      *
-     * @param <E> <E extends Component>
+     * @param <E> <E extends TextComponent>
      */
-    public interface ComponentIterable<E extends Component> extends Iterable<E> {
+    public interface ComponentIterable<E extends TextComponent> extends Iterable<E> {
 
     }
 }

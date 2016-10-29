@@ -3,12 +3,12 @@ package com.epam.adk.task2.text_processing.entity;
 import java.util.List;
 
 /**
- * Interface Composite created on 23.10.2016.
+ * Interface TextComposite created on 23.10.2016.
  *
  * @author Kaikenov Adilkhan.
- * @see Component
+ * @see TextComponent
  */
-public interface Composite<E extends Component> extends Component {
+public interface TextComposite<E extends TextComponent> extends TextComponent {
 
     boolean add(E component);
 

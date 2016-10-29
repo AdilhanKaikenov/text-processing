@@ -1,6 +1,6 @@
 package com.epam.adk.task2.text_processing.parse;
 
-import com.epam.adk.task2.text_processing.entity.Composite;
+import com.epam.adk.task2.text_processing.entity.TextComposite;
 import com.epam.adk.task2.text_processing.entity.Text;
 import com.epam.adk.task2.text_processing.exception.ParsingException;
 
@@ -23,13 +23,13 @@ public interface TextParser {
     /**
      * The method for parsing source string.
      *
-     * @param compositeClass Composite type class which we need to parseTo.
+     * @param compositeClass TextComposite type class which we need to parseTo.
      * @param source target source string to parseTo.
      * @param <T> type parameterization.
-     * @return <T extends Composite> T instance.
+     * @return <T extends TextComposite> T instance.
      * @throws ParsingException
      */
-    <T extends Composite> T parseTo(Class<T> compositeClass, String source) throws ParsingException;
+    <T extends TextComposite> T parseTo(Class<T> compositeClass, String source) throws ParsingException;
 
 
 }

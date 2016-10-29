@@ -27,8 +27,8 @@ public final class RegexTextParser implements TextParser {
 
     private static Properties properties;
     private static PropertyLoader regexLoader = new PropertyLoader();
-    private static Map<Class<? extends Composite>, Pattern> regularExpressions = new HashMap<>();
-    private static Map<Class<? extends Composite>, Class<? extends Component>> componentClasses = new HashMap<>();
+    private static Map<Class<? extends TextComposite>, Pattern> regularExpressions = new HashMap<>();
+    private static Map<Class<? extends TextComposite>, Class<? extends TextComponent>> componentClasses = new HashMap<>();
 
     public RegexTextParser() throws PropertyPathException {
         properties = regexLoader.getProperties(PARSER_REGEX_PROPERTIES);
@@ -37,11 +37,11 @@ public final class RegexTextParser implements TextParser {
     }
 
     /**
-     * The method for initializing the Map<Class<Composite>, Pattern> containing the regular expressions to parse the composites.
+     * The method for initializing the Map<Class<TextComposite>, Pattern> containing the regular expressions to parse the composites.
      *
      * @return map containing the regular expressions to parse the composites e.g. Text to Paragraph, Paragraph to Sentence etc.
      */
-    private static Map<Class<? extends Composite>, Pattern> loadRegularExpressions() {
+    private static Map<Class<? extends TextComposite>, Pattern> loadRegularExpressions() {
         regularExpressions.put(Text.class, Pattern.compile(properties.getProperty("textToParagraphRegex")));
         regularExpressions.put(Paragraph.class, Pattern.compile(properties.getProperty("paragraphToSentenceRegex")));
         regularExpressions.put(Sentence.class, Pattern.compile(properties.getProperty("sentenceToSentenceComponentRegex")));
@@ -51,11 +51,11 @@ public final class RegexTextParser implements TextParser {
     }
 
     /**
-     * The method for initializing the Map<Class<Composite>, Class<Component>> containing the component classes.
+     * The method for initializing the Map<Class<TextComposite>, Class<TextComponent>> containing the component classes.
      *
      * @return map containing the component classes of the composite classes.
      */
-    private static Map<Class<? extends Composite>, Class<? extends Component>> loadComponentClasses() {
+    private static Map<Class<? extends TextComposite>, Class<? extends TextComponent>> loadComponentClasses() {
         componentClasses.put(Text.class, Paragraph.class);
         componentClasses.put(Paragraph.class, Sentence.class);
         componentClasses.put(Sentence.class, SentenceComponent.class);
@@ -70,7 +70,7 @@ public final class RegexTextParser implements TextParser {
     }
 
     @Override
-    public <T extends Composite> T parseTo(Class<T> compositeClass, String source) throws ParsingException {
+    public <T extends TextComposite> T parseTo(Class<T> compositeClass, String source) throws ParsingException {
         log.trace("Entering parseTo(): parse source string with length = '{}', to '{}'.", source.length(), compositeClass.getSimpleName());
         T composite;
         Class componentClass;
@@ -83,13 +83,17 @@ public final class RegexTextParser implements TextParser {
             while (matcher.find()) {
                 String matchedString = matcher.group();
                 if (componentClass.equals(SentenceComponent.class)) {
-                    Component component = identifySentenceComponent(matchedString);
+                    TextComponent component = identifySentenceComponent(matchedString);
                     composite.add(component);
                 } else if (componentClass.equals(Symbol.class)) {
-                    Symbol symbol = Symbol.of(matchedString.charAt(0));
-                    composite.add(symbol);
+                    if (matchedString.length() == 1) {
+                        Symbol symbol = Symbol.of(matchedString.charAt(0));
+                        composite.add(symbol);
+                    } else {
+                        return null;
+                    }
                 } else {
-                    Composite component = parseTo(componentClass, matchedString);
+                    TextComposite component = parseTo(componentClass, matchedString);
                     composite.add(component);
                 }
             }
@@ -104,11 +108,11 @@ public final class RegexTextParser implements TextParser {
      * The method for determining a component of the sentence. Such as words and punctuation.
      *
      * @param matchedString string to define a specific component of the sentence.
-     * @return Component type (Word, PMark)
+     * @return TextComponent type (Word, PMark)
      * @throws ParsingException
      */
-    private Component identifySentenceComponent(String matchedString) throws ParsingException {
-        Component component = null;
+    private TextComponent identifySentenceComponent(String matchedString) throws ParsingException {
+        TextComponent component = null;
 
         if (matchedString.matches(properties.getProperty("word"))) {
             component = parseTo(Word.class, matchedString);

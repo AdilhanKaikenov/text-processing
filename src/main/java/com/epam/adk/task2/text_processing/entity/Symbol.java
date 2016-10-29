@@ -10,45 +10,52 @@ import java.util.Map;
  * Symbol class created on 23.10.2016.
  *
  * @author Kaikenov Adilkhan.
- * @see Composite
- * @see Leaf
+ * @see TextComposite
+ * @see TextLeaf
  * @see SentenceComponent
  */
-public class Symbol implements Leaf, SentenceComponent {
+public class Symbol implements TextLeaf, SentenceComponent {
 
     private static final Logger log = LoggerFactory.getLogger(Symbol.class);
 
     /**
-     * @param cache cache of symbols.
+     * @param cache cache of symbols to store codes of ASCII symbols from 32 to 128.
      */
-    private static Map<Character, Symbol> cache;
+    private static final Symbol[] cache = new Symbol[127 + 1];
     private Character symbol;
 
     private Symbol(Character symbol) {
         this.symbol = symbol;
     }
 
+    static {
+        loadCache();
+    }
+
+    private static void loadCache(){
+        for (int i = 32; i < cache.length; i++) {
+            cache[i] = new Symbol((char) i);
+        }
+        log.debug("Cache of symbols loaded. Cache length = {}.", cache.length);
+    }
+
     /**
      * Symbol Factory method.
      *
-     * @param ch char
+     * @param symbol char
      * @return Symbol
      */
-    public static Symbol of(char ch) {
+    public static Symbol of(char symbol) {
 
-        if (cache == null) {
-            cache = new HashMap<>();
+        if (cache.length < (int) symbol) {
+            log.debug("Symbol '{}' is not present in the cache of symbols.", symbol);
+            return new Symbol(symbol);
+        } else {
+            return cache[symbol];
         }
-
-        Symbol symbol = cache.get(ch);
-
-        if (symbol == null) {
-            cache.put(ch, new Symbol(ch));
-        }
-        return symbol;
     }
 
-    @Override
+        @Override
     public String toSourceString() {
         return String.valueOf(symbol);
     }

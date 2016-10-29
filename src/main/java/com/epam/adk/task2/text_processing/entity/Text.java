@@ -8,9 +8,9 @@ import java.util.List;
  * Text class created on 23.10.2016.
  *
  * @author Kaikenov Adilkhan.
- * @see Composite
+ * @see TextComposite
  */
-public class Text extends AbstractComposite<Paragraph> {
+public class Text extends AbstractTextComposite<Paragraph> {
 
     private ParagraphItr paragraphItr;
     private SentenceItr sentenceItr;
@@ -43,11 +43,7 @@ public class Text extends AbstractComposite<Paragraph> {
     private List<Word> getWords() {
         List<Word> words = new ArrayList<>();
         for (Sentence sentence : this.getSentences()) {
-            for (Component component : sentence.getComponents()) {
-                if (component != null && component.getClass() == Word.class) {
-                    words.add((Word) component);
-                }
-            }
+            words.addAll(sentence.getWords());
         }
         return words;
     }

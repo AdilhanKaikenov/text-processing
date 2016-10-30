@@ -69,7 +69,7 @@ public final class TextProcessingApp {
                         new Task8(),
                         new Task9_13('a', Task9_13.Direction.DECREASE),
                         new Task10(words),
-                        new Task11("Lorem", "consectetur"), // TODO:
+                        new Task11("et", "sit"),
                         new Task12(5), // TODO: does not work
                         new Task14(), // TODO:
                         new Task15(Task15.Position.FROM_FIRSTS),

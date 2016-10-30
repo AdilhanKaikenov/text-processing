@@ -86,12 +86,8 @@ public final class RegexTextParser implements TextParser {
                     TextComponent component = identifySentenceComponent(matchedString);
                     composite.add(component);
                 } else if (componentClass.equals(Symbol.class)) {
-                    if (matchedString.length() == 1) {
-                        Symbol symbol = Symbol.of(matchedString.charAt(0));
-                        composite.add(symbol);
-                    } else {
-                        return null;
-                    }
+                    Symbol symbol = Symbol.of(matchedString.charAt(0));
+                    composite.add(symbol);
                 } else {
                     TextComposite component = parseTo(componentClass, matchedString);
                     composite.add(component);

@@ -21,6 +21,7 @@ import java.util.List;
 public final class Task6 implements Task {
 
     private static final Logger log = LoggerFactory.getLogger(Task6.class);
+    private static final int MAX_NUMBER_WORDS_IN_ROW = 6;
 
     @Override
     public void run(Text text) {
@@ -71,7 +72,7 @@ public final class Task6 implements Task {
             currFirstChar = words.get(i).toString().toLowerCase().charAt(0);
 
             // Условие для подсчета слов в строке
-            if (countInRow == 6) {
+            if (countInRow == MAX_NUMBER_WORDS_IN_ROW) {
                 sb.append("\n");
                 isRed = true;
                 countInRow = 1;

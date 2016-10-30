@@ -7,5 +7,4 @@ package com.epam.adk.task2.text_processing.entity;
  * @see TextComponent
  */
 public interface SentenceComponent extends TextComponent {
-
 }

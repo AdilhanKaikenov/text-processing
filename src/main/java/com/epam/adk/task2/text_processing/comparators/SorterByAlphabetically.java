@@ -9,7 +9,7 @@ import java.util.Comparator;
  *
  * @author Kaikenov Adilkhan
  */
-public class SorterByAlphabetically implements Comparator<Word>{
+public final class SorterByAlphabetically implements Comparator<Word>{
 
     @Override
     public int compare(Word wordOne, Word wordTwo) {

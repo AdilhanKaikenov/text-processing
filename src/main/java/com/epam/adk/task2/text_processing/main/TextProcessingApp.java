@@ -68,7 +68,12 @@ public final class TextProcessingApp {
                         new Task7(),
                         new Task8(),
                         new Task9_13('a', Task9_13.Direction.DECREASE),
-                        new Task10(words)
+                        new Task10(words),
+                        new Task11("Lorem", "consectetur"), // TODO:
+                        new Task12(5), // TODO: does not work
+                        new Task14(), // TODO:
+                        new Task15(),
+                        new Task16(5, "REPLACED")
                 ),
                 parsedText);
     }

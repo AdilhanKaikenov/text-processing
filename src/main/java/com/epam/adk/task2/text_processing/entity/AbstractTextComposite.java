@@ -8,10 +8,9 @@ import java.util.*;
  * @author Kaikenov Adilhan.
  * @see TextComposite
  */
-public abstract class AbstractTextComposite<E extends TextComponent> implements TextComposite<E>, Iterable<E> {
+public abstract class AbstractTextComposite<E extends TextComponent> implements TextComposite<E>, Iterable<E>, Cloneable {
 
     private List<E> components;
-
 
     public AbstractTextComposite() {
         components = new ArrayList<>();
@@ -52,7 +51,7 @@ public abstract class AbstractTextComposite<E extends TextComponent> implements 
      */
     @Override
     public List<E> getComponents() {
-        return new ArrayList<>(components);
+        return components;
     }
 
     @Override
@@ -102,7 +101,6 @@ public abstract class AbstractTextComposite<E extends TextComponent> implements 
      *
      * @param <E> <E extends TextComponent>
      */
-    public interface ComponentIterable<E extends TextComponent> extends Iterable<E> {
-
+    public abstract class ComponentIterable<E extends TextComponent> implements Iterable<E> {
     }
 }

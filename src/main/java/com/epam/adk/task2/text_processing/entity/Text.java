@@ -1,8 +1,6 @@
 package com.epam.adk.task2.text_processing.entity;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Text class created on 23.10.2016.
@@ -48,6 +46,15 @@ public class Text extends AbstractTextComposite<Paragraph> {
         return words;
     }
 
+    @Override
+    public Text clone() {
+        Text text = new Text();
+        for (Paragraph paragraph : this.getComponents()) {
+            text.add(paragraph.clone());
+        }
+        return text;
+    }
+
     public Iterator<Paragraph> paragraphItr() {
         return paragraphItr.iterator();
     }
@@ -60,25 +67,29 @@ public class Text extends AbstractTextComposite<Paragraph> {
         return wordItr.iterator();
     }
 
+    private class ParagraphItr extends ComponentIterable<Paragraph> {
 
-    private class ParagraphItr implements ComponentIterable<Paragraph> {
         @Override
         public Iterator<Paragraph> iterator() {
             return getComponents().iterator();
         }
     }
 
-    private class SentenceItr implements ComponentIterable<Sentence> {
+    private class SentenceItr extends ComponentIterable<Sentence> {
+
         @Override
         public Iterator<Sentence> iterator() {
             return getSentences().iterator();
         }
     }
 
-    private class WordItr implements ComponentIterable<Word> {
+    private class WordItr extends ComponentIterable<Word> {
+
         @Override
         public Iterator<Word> iterator() {
             return getWords().iterator();
         }
     }
 }
+
+

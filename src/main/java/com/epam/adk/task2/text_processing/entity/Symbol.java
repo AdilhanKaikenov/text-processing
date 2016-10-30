@@ -82,5 +82,4 @@ public class Symbol implements TextLeaf, SentenceComponent {
     public int hashCode() {
         return (int) symbol;
     }
-
 }

@@ -14,7 +14,7 @@ import java.util.Properties;
  *
  * @author Kaikenov Adilkhan
  */
-public class SorterByNumberOfVowels implements Comparator<Word> {
+public final class SorterByNumberOfVowels implements Comparator<Word> {
 
     private static final Logger log = LoggerFactory.getLogger(SorterByNumberOfVowels.class);
     private static final String PARSER_REGEX_PROPERTIES = "parser-regex.properties";

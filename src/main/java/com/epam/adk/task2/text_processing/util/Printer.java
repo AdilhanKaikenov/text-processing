@@ -1,22 +1,17 @@
 package com.epam.adk.task2.text_processing.util;
 
 import com.epam.adk.task2.text_processing.entity.TextComponent;
-import com.epam.adk.task2.text_processing.entity.TextComposite;
-import com.epam.adk.task2.text_processing.entity.Text;
-import com.sun.xml.internal.ws.api.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Printer class Created on 29.10.2016.
  *
  * @author Kaikenov Adilkhan
  */
-public class Printer {
+public final class Printer {
 
     private static final Logger log = LoggerFactory.getLogger(Printer.class);
 
@@ -27,10 +22,10 @@ public class Printer {
      * @param numbered boolean true for numbering, false for not.
      * @param <E>      type parameterization.
      */
-    public static <E extends TextComposite> void print(Collection<E> list, boolean numbered) {
+    public static <E extends TextComponent> void print(Collection<E> list, boolean numbered) {
         if (!list.isEmpty() && numbered) {
             int i = 1;
-            for (TextComposite composite : list) {
+            for (TextComponent composite : list) {
                 log.info("{}){}", i++, composite.toString().trim());
             }
             log.info("");
@@ -45,9 +40,9 @@ public class Printer {
      * @param list list of composite.
      * @param <E>  type parameterization.
      */
-    public static <E extends TextComposite> void print(Collection<E> list) {
+    public static <E extends TextComponent> void print(Collection<E> list) {
         if (!list.isEmpty()) {
-            for (TextComposite composite : list) {
+            for (TextComponent composite : list) {
                 log.info(composite.toString().trim());
             }
             log.info("");

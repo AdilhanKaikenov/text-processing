@@ -11,6 +11,15 @@ import java.util.List;
 public class Paragraph extends AbstractTextComposite<Sentence> {
 
     @Override
+    public Paragraph clone() {
+        Paragraph paragraph = new Paragraph();
+        for (Sentence sentence : this.getComponents()) {
+            paragraph.add(sentence.clone());
+        }
+        return paragraph;
+    }
+
+    @Override
     public void toSourceString(StringBuilder builder) {
         int index = 0;
         List<Sentence> components = getComponents();

@@ -8,7 +8,6 @@ import com.epam.adk.task2.text_processing.util.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,9 +29,12 @@ public final class Task5 implements Task {
         int indexOfFirst = 0;
         int indexOfLast = 0;
 
-        Iterator<Sentence> iterator = text.sentenceItr();
+        Text textClone = text.clone();
+
+        Iterator<Sentence> iterator = textClone.sentenceItr();
         while (iterator.hasNext()) {
             Sentence sentence = iterator.next();
+
             List<SentenceComponent> components = sentence.getComponents();
 
             Word firstWord = sentence.getFirstWord(); // the first word
@@ -45,7 +47,7 @@ public final class Task5 implements Task {
             sentence.set(indexOfFirst, lastWord);
             sentence.set(indexOfLast, firstWord);
 
-            Printer.print(sentence);
+        Printer.print(sentence);
         }
         log.info("");
     }

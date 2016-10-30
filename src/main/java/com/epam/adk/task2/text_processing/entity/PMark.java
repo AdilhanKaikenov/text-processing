@@ -20,10 +20,4 @@ public class PMark extends AbstractTextComposite<Symbol> implements SentenceComp
     public String toString() {
         return this.toSourceString();
     }
-
-    @Override
-    public int hashCode() {
-        return getComponents() != null ? getComponents().hashCode() : 0;
-    }
-
 }

@@ -12,11 +12,7 @@ import java.util.List;
  */
 public class Sentence extends AbstractTextComposite<SentenceComponent> {
 
-    private SentenceComponentItr sentenceComponentItr;
-    private int numberOfWords;
-
     public Sentence() {
-        sentenceComponentItr = new SentenceComponentItr();
     }
 
     /**
@@ -90,8 +86,16 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
     }
 
     public int getNumberOfWords() {
-        numberOfWords = getWords().size();
-        return numberOfWords;
+        return getWords().size();
+    }
+
+    @Override
+    public Sentence clone() {
+        Sentence sentence = new Sentence();
+        for (SentenceComponent component : this.getComponents()) {
+            sentence.add(component);
+        }
+        return sentence;
     }
 
     @Override
@@ -100,10 +104,10 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
     }
 
     public Iterator<SentenceComponent> sentenceComponentIterator(){
-        return sentenceComponentItr.iterator();
+        return new SentenceComponentItr().iterator();
     }
 
-    private class SentenceComponentItr implements ComponentIterable<SentenceComponent> {
+    private class SentenceComponentItr extends ComponentIterable<SentenceComponent> {
 
         @Override
         public Iterator<SentenceComponent> iterator() {

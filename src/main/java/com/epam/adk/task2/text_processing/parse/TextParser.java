@@ -1,7 +1,7 @@
 package com.epam.adk.task2.text_processing.parse;
 
-import com.epam.adk.task2.text_processing.entity.TextComposite;
 import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.TextComposite;
 import com.epam.adk.task2.text_processing.exception.ParsingException;
 
 /**
@@ -30,6 +30,4 @@ public interface TextParser {
      * @throws ParsingException
      */
     <T extends TextComposite> T parseTo(Class<T> compositeClass, String source) throws ParsingException;
-
-
 }

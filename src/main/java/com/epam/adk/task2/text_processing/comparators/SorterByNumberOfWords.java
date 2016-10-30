@@ -9,7 +9,7 @@ import java.util.Comparator;
  *
  * @author Kaikenov Adilkhan
  */
-public class SorterByNumberOfWords implements Comparator<Sentence> {
+public final class SorterByNumberOfWords implements Comparator<Sentence> {
 
     @Override
     public int compare(Sentence sentenceOne, Sentence sentenceTwo) {

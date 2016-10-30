@@ -9,7 +9,7 @@ import java.util.Comparator;
  *
  * @author Kaikenov Adilkhan
  */
-public class SorterByNumberOfLetters implements Comparator<Word> {
+public final class SorterByNumberOfLetters implements Comparator<Word> {
 
     private Character specificLetter;
 

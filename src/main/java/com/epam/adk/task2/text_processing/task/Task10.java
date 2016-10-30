@@ -44,7 +44,7 @@ public final class Task10 implements Task {
         for (Word word : map.keySet()){
             log.info("Word '{}' found {} times.", word, map.get(word));
         }
-        System.out.println();
+        log.info("");
     }
 
     /**

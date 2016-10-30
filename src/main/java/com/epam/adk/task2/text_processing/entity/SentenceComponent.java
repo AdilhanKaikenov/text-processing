@@ -6,5 +6,8 @@ package com.epam.adk.task2.text_processing.entity;
  * @author Kaikenov Adilkhan.
  * @see TextComponent
  */
-public interface SentenceComponent extends TextComponent {
+public interface SentenceComponent extends TextComponent, Cloneable {
+
+    SentenceComponent clone();
+
 }

@@ -48,7 +48,7 @@ public final class Task12 implements Task {
             Word word = iterator.next();
             int length = word.length();
             if (isFirstConsonant(word) && length == this.length){
-                iterator.remove(); // TODO remove default UnsupportedOperationException()
+                iterator.remove(); // TODO: remove default UnsupportedOperationException()
             }
         }
         Printer.print(textClone);

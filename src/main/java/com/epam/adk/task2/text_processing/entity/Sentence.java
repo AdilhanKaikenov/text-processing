@@ -58,7 +58,7 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
         int index = 0;
         while (true) {
             SentenceComponent sentenceElement = this.get(index);
-            if (sentenceElement != null && sentenceElement.getClass() == Word.class) {
+            if (sentenceElement != null && sentenceElement.getClass().equals(Word.class)) {
                 break;
             } else {
                 index++;
@@ -76,7 +76,7 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
         int index = getComponents().size() - 1;
         while (true) {
             SentenceComponent sentenceElement = this.get(index);
-            if (sentenceElement != null && sentenceElement.getClass() == Word.class) {
+            if (sentenceElement != null && sentenceElement.getClass().equals(Word.class)) {
                 break;
             } else {
                 index--;
@@ -93,7 +93,7 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
     public Sentence clone() {
         Sentence sentence = new Sentence();
         for (SentenceComponent component : this.getComponents()) {
-            sentence.add(component);
+            sentence.add(component.clone());
         }
         return sentence;
     }

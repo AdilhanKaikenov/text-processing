@@ -54,6 +54,15 @@ public class Word extends AbstractTextComposite<Symbol> implements SentenceCompo
     }
 
     @Override
+    public Word clone() {
+        Word word = new Word();
+        for (Symbol component : this.getComponents()) {
+            word.add(component);
+        }
+        return word;
+    }
+
+    @Override
     public String toString() {
         return this.toSourceString();
     }

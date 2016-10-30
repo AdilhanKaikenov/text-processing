@@ -24,10 +24,11 @@ public final class Task3 implements Task {
     public void run(Text text) {
 
         log.info("Task #3");
+        Text textClone = text.clone();
 
         List<Word> result = new ArrayList<>();
 
-        Iterator<Paragraph> iterator = text.paragraphItr();
+        Iterator<Paragraph> iterator = textClone.paragraphItr();
         Paragraph sentences = iterator.next();
         Sentence firstSentence = sentences.get(0);
         sentences.remove(firstSentence); //remove first sentence
@@ -52,7 +53,6 @@ public final class Task3 implements Task {
             log.info("<!> In the first sentence, there is no unique words. <!>\n");
         }
     }
-
 
     private boolean isWordContains(Word word, List<Sentence> sentences) {
         for (Sentence sentence : sentences) {

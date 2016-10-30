@@ -39,7 +39,6 @@ public final class Task1 implements Task {
         Printer.print(result, true);
     }
 
-
     /**
      * The method for checking the equivalence of words.
      *

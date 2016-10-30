@@ -52,7 +52,12 @@ public class Symbol implements TextLeaf, SentenceComponent {
         }
     }
 
-        @Override
+    @Override
+    public Symbol clone() {
+        return Symbol.of(symbol);
+    }
+
+    @Override
     public String toSourceString() {
         return String.valueOf(symbol);
     }

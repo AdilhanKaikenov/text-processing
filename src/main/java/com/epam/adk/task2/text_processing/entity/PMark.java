@@ -17,6 +17,15 @@ public class PMark extends AbstractTextComposite<Symbol> implements SentenceComp
     }
 
     @Override
+    public PMark clone() {
+        PMark punctuation = new PMark();
+        for (Symbol component : this.getComponents()) {
+            punctuation.add(component);
+        }
+        return punctuation;
+    }
+
+    @Override
     public String toString() {
         return this.toSourceString();
     }

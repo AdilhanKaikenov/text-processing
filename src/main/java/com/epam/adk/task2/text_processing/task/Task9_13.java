@@ -53,9 +53,11 @@ public final class Task9_13 implements Task{
                 break;
         }
         Printer.print(result, true);
-
     }
 
+    /**
+     * Inner enum class Direction.
+     */
     public enum Direction {
 
         INCREASE, DECREASE

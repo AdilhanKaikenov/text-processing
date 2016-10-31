@@ -2,13 +2,14 @@ package com.epam.adk.task2.text_processing.task;
 
 import com.epam.adk.task2.text_processing.comparators.SorterByNumberOfLetters;
 import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.TextComponent;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import com.epam.adk.task2.text_processing.entity.Word;
 import com.epam.adk.task2.text_processing.util.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ import java.util.List;
  * @author Kaikenov Adilkhan
  * @see Task
  */
-public final class Task9_13 implements Task{
+public final class Task9_13 implements Task {
 
     private static final Logger log = LoggerFactory.getLogger(Task9_13.class);
 
@@ -39,12 +40,15 @@ public final class Task9_13 implements Task{
 
         List<Word> result = new ArrayList<>();
 
-        Iterator<Word> iterator = text.wordItr();
-        while (iterator.hasNext()){
-            result.add(iterator.next());
+        TextComponentIterator iterator = new TextComponentIterator(text.clone());
+        while (iterator.hasNext()) {
+            TextComponent component = iterator.next();
+            if (component instanceof Word) {
+                result.add((Word) component);
+            }
         }
 
-        switch (direction){
+        switch (direction) {
             case INCREASE:
                 result.sort(new SorterByNumberOfLetters(ch).reversed());
                 break;

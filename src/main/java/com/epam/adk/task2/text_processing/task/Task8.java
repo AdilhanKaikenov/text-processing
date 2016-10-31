@@ -2,6 +2,8 @@ package com.epam.adk.task2.text_processing.task;
 
 import com.epam.adk.task2.text_processing.comparators.SorterByFirstConsonant;
 import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.TextComponent;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import com.epam.adk.task2.text_processing.entity.Word;
 import com.epam.adk.task2.text_processing.exception.PropertyPathException;
 import com.epam.adk.task2.text_processing.util.Printer;
@@ -10,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -42,11 +43,14 @@ public final class Task8 implements Task {
         log.info("Task #8");
         List<Word> firstLetterVowelWords = new ArrayList<>();
 
-        Iterator<Word> iterator = text.wordItr();
+        TextComponentIterator iterator = new TextComponentIterator(text.clone());
+
         while (iterator.hasNext()) {
-            Word word = iterator.next();
-            if (isWordsBeginVowel(word)) {
-                firstLetterVowelWords.add(word);
+            TextComponent component = iterator.next();
+            if (component instanceof Word) {
+                if (isWordsBeginVowel(((Word) component))) {
+                    firstLetterVowelWords.add(((Word) component));
+                }
             }
         }
         firstLetterVowelWords.sort(new SorterByFirstConsonant());

@@ -16,9 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created on 22.10.2016.
- * <p>
- * The class with main method.
+ * The class with main method. Created on 22.10.2016.
  *
  * @author Kaikenov Adilhan.
  */

@@ -1,6 +1,8 @@
 package com.epam.adk.task2.text_processing.task;
 
 import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.TextComponent;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import com.epam.adk.task2.text_processing.entity.Word;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +33,7 @@ public final class Task10 implements Task {
 
         Map<Word, Integer> result = new HashMap<>();
 
-        for (Word word : wordList){
+        for (Word word : wordList) {
             result.put(word, count(text, word));
         }
 
@@ -40,8 +42,8 @@ public final class Task10 implements Task {
 
     }
 
-    private static void print(Map<Word, Integer> map){
-        for (Word word : map.keySet()){
+    private static void print(Map<Word, Integer> map) {
+        for (Word word : map.keySet()) {
             log.info("Word '{}' found {} times.", word, map.get(word));
         }
         log.info("");
@@ -51,18 +53,21 @@ public final class Task10 implements Task {
      * The method for counting the word in a list words of sentence.
      *
      * @param sourceWord word.
-     * @param text Text instance.
+     * @param text       Text instance.
      * @return the number of specific word in the sentence.
      */
-    private int count(Text text, Word sourceWord){
+    private int count(Text text, Word sourceWord) {
         int count = 0;
 
-        Iterator<Word> iterator = text.wordItr();
+        TextComponentIterator iterator = new TextComponentIterator(text);
 
-        while (iterator.hasNext()){
-            Word word = iterator.next();
-            if (word.equals(sourceWord)){
-                count++;
+        while (iterator.hasNext()) {
+
+            TextComponent component = iterator.next();
+            if (component instanceof Word) {
+                if (component.equals(sourceWord)) {
+                    count++;
+                }
             }
         }
         return count;
@@ -74,7 +79,7 @@ public final class Task10 implements Task {
      * @param map map for sorting.
      * @return sorted map.
      */
-    private Map<Word, Integer> sort(Map<Word, Integer> map){
+    private Map<Word, Integer> sort(Map<Word, Integer> map) {
 
         ArrayList<Map.Entry<Word, Integer>> entries = new ArrayList<>(map.entrySet());
 
@@ -87,7 +92,7 @@ public final class Task10 implements Task {
 
         Map<Word, Integer> result = new LinkedHashMap<>(); // LinkedHashMap
 
-        for (Map.Entry<Word, Integer> entry: entries){
+        for (Map.Entry<Word, Integer> entry : entries) {
             result.put(entry.getKey(), entry.getValue());
         }
         return result;

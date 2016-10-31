@@ -2,6 +2,7 @@ package com.epam.adk.task2.text_processing.task;
 
 import com.epam.adk.task2.text_processing.entity.*;
 import com.epam.adk.task2.text_processing.util.Printer;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,14 +32,19 @@ public final class Task4 implements Task {
         log.info("Task #4");
 
         List<Sentence> interrogativeSentences = new ArrayList<>();
-        Iterator<Sentence> iterator = text.sentenceItr();
+
+        TextComponentIterator iterator = new TextComponentIterator(text.clone());
+
         PMark questionMark = new PMark(Symbol.of('?'));
         while (iterator.hasNext()) {
-            Sentence sentence = iterator.next();
-            if (sentence.getPMarks().contains(questionMark)){
-                interrogativeSentences.add(sentence);
+            TextComponent component = iterator.next();
+            if (component instanceof Sentence) {
+                Sentence sentence = (Sentence) component;
+                if (sentence.getPMarks().contains(questionMark)) {
+                    interrogativeSentences.add(sentence);
                 }
             }
+        }
 
         Set<Word> wordSet = new HashSet<>();
         wordSet.addAll(giveWordsOfTheSpecifiedLength(interrogativeSentences));

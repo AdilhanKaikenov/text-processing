@@ -1,14 +1,11 @@
 package com.epam.adk.task2.text_processing.task;
 
-import com.epam.adk.task2.text_processing.entity.Sentence;
-import com.epam.adk.task2.text_processing.entity.SentenceComponent;
-import com.epam.adk.task2.text_processing.entity.Text;
-import com.epam.adk.task2.text_processing.entity.Word;
+import com.epam.adk.task2.text_processing.entity.*;
 import com.epam.adk.task2.text_processing.util.Printer;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,23 +28,28 @@ public final class Task5 implements Task {
 
         Text textClone = text.clone();
 
-        Iterator<Sentence> iterator = textClone.sentenceItr();
+        TextComponentIterator iterator = new TextComponentIterator(textClone);
+
         while (iterator.hasNext()) {
-            Sentence sentence = iterator.next();
+            TextComponent component = iterator.next();
 
-            List<SentenceComponent> components = sentence.getComponents();
+            if (component instanceof Sentence) {
 
-            Word firstWord = sentence.getFirstWord(); // the first word
-            Word lastWord = sentence.getLastWord(); // the last word
+                Sentence sentence = (Sentence) component;
+                List<SentenceComponent> components = sentence.getComponents();
 
-            indexOfFirst = components.indexOf(firstWord); // index of the first word
-            indexOfLast = components.lastIndexOf(lastWord); // index of the last word
+                Word firstWord = sentence.getFirstWord(); // the first word
+                Word lastWord = sentence.getLastWord(); // the last word
 
-            // move the first and last word
-            sentence.set(indexOfFirst, lastWord);
-            sentence.set(indexOfLast, firstWord);
+                indexOfFirst = components.indexOf(firstWord); // index of the first word
+                indexOfLast = components.lastIndexOf(lastWord); // index of the last word
 
-        Printer.print(sentence);
+                // move the first and last word
+                sentence.set(indexOfFirst, lastWord);
+                sentence.set(indexOfLast, firstWord);
+
+                Printer.print(sentence);
+            }
         }
         log.info("");
     }

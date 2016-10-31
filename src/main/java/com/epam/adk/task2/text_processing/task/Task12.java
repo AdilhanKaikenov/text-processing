@@ -1,6 +1,8 @@
 package com.epam.adk.task2.text_processing.task;
 
 import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.TextComponent;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import com.epam.adk.task2.text_processing.entity.Word;
 import com.epam.adk.task2.text_processing.exception.PropertyPathException;
 import com.epam.adk.task2.text_processing.util.Printer;
@@ -8,7 +10,6 @@ import com.epam.adk.task2.text_processing.util.PropertyLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Iterator;
 import java.util.Properties;
 
 /**
@@ -42,13 +43,15 @@ public final class Task12 implements Task {
 
         Text textClone = text.clone();
 
-        Iterator<Word> iterator = textClone.wordItr();
+        TextComponentIterator iterator = new TextComponentIterator(textClone);
 
-        while (iterator.hasNext()){
-            Word word = iterator.next();
-            int length = word.length();
-            if (isFirstConsonant(word) && length == this.length){
-                iterator.remove(); // TODO: remove default UnsupportedOperationException()
+        while (iterator.hasNext()) {
+            TextComponent component = iterator.next();
+            if (component instanceof Word) {
+                int length = ((Word) component).length();
+                if (isFirstConsonant((Word) component) && length == this.length) {
+//                    iterator.remove(); // TODO: remove default UnsupportedOperationException()
+                }
             }
         }
         Printer.print(textClone);
@@ -60,9 +63,9 @@ public final class Task12 implements Task {
      * @param word word
      * @return boolean true if the first letter of word is consonant and false if not.
      */
-    private boolean isFirstConsonant(Word word){
+    private boolean isFirstConsonant(Word word) {
         String w = word.toString();
-        if (w.matches(properties.getProperty("isFirstConsonant"))){
+        if (w.matches(properties.getProperty("isFirstConsonant"))) {
             return true;
         }
         return false;

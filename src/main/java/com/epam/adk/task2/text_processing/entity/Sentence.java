@@ -22,7 +22,7 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
      */
     public List<Word> getWords() {
         List<Word> words = new ArrayList<>();
-        Iterator<SentenceComponent> iterator = sentenceComponentIterator();
+        Iterator<SentenceComponent> iterator = this.iterator();
         while (iterator.hasNext()){
             SentenceComponent component = iterator.next();
             if (component != null && component.getClass() == Word.class) {
@@ -39,7 +39,7 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
      */
     public List<PMark> getPMarks() {
         List<PMark> pMarks = new ArrayList<>();
-        Iterator<SentenceComponent> iterator = sentenceComponentIterator();
+        Iterator<SentenceComponent> iterator = this.iterator();
         while (iterator.hasNext()){
             SentenceComponent component = iterator.next();
             if (component != null && component.getClass() == PMark.class) {
@@ -101,17 +101,5 @@ public class Sentence extends AbstractTextComposite<SentenceComponent> {
     @Override
     public String toString() {
         return this.toSourceString();
-    }
-
-    public Iterator<SentenceComponent> sentenceComponentIterator(){
-        return new SentenceComponentItr().iterator();
-    }
-
-    private class SentenceComponentItr extends ComponentIterable<SentenceComponent> {
-
-        @Override
-        public Iterator<SentenceComponent> iterator() {
-            return getComponents().iterator();
-        }
     }
 }

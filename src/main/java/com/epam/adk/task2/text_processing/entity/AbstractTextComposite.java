@@ -88,19 +88,10 @@ public abstract class AbstractTextComposite<E extends TextComponent> implements 
         AbstractTextComposite<?> that = (AbstractTextComposite<?>) o;
 
         return components != null ? components.equals(that.components) : that.components == null;
-
     }
 
     @Override
     public int hashCode() {
         return components != null ? components.hashCode() : 0;
-    }
-
-    /**
-     * Inner Abstract class CompositeIterator.
-     *
-     * @param <E> <E extends TextComponent>
-     */
-    public abstract class ComponentIterable<E extends TextComponent> implements Iterable<E> {
     }
 }

@@ -1,15 +1,13 @@
 package com.epam.adk.task2.text_processing.task;
 
 import com.epam.adk.task2.text_processing.comparators.SorterByNumberOfVowels;
-import com.epam.adk.task2.text_processing.entity.Sentence;
-import com.epam.adk.task2.text_processing.entity.Text;
-import com.epam.adk.task2.text_processing.entity.Word;
+import com.epam.adk.task2.text_processing.entity.*;
 import com.epam.adk.task2.text_processing.util.Printer;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,9 +27,14 @@ public final class Task7 implements Task {
         log.info("Task #7");
 
         List<Word> words = new ArrayList<>();
-        Iterator<Sentence> iterator = text.sentenceItr();
+
+        TextComponentIterator iterator = new TextComponentIterator(text.clone());
+
         while (iterator.hasNext()) {
-            words.addAll(iterator.next().getWords());
+            TextComponent component = iterator.next();
+            if (component instanceof Sentence) {
+                words.addAll(((Sentence) component).getWords());
+            }
         }
         words.sort(new SorterByNumberOfVowels());
         Printer.print(words, true);

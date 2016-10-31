@@ -1,18 +1,15 @@
 package com.epam.adk.task2.text_processing.task;
 
-import com.epam.adk.task2.text_processing.entity.Sentence;
-import com.epam.adk.task2.text_processing.entity.SentenceComponent;
-import com.epam.adk.task2.text_processing.entity.Text;
-import com.epam.adk.task2.text_processing.entity.Word;
+import com.epam.adk.task2.text_processing.entity.*;
 import com.epam.adk.task2.text_processing.exception.ParsingException;
 import com.epam.adk.task2.text_processing.exception.PropertyPathException;
 import com.epam.adk.task2.text_processing.parse.RegexTextParser;
 import com.epam.adk.task2.text_processing.parse.TextParser;
 import com.epam.adk.task2.text_processing.util.Printer;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -40,7 +37,7 @@ public final class Task16 implements Task {
         log.info("Task #16");
 
         Text textClone = text.clone();
-        Iterator<Sentence> iterator = textClone.sentenceItr();
+        TextComponentIterator iterator = new TextComponentIterator(textClone);
 
         TextParser parser;
         Sentence parsedSubstring = null;
@@ -53,15 +50,18 @@ public final class Task16 implements Task {
 
         List<SentenceComponent> substringComponents = parsedSubstring.getComponents();
 
-        while (iterator.hasNext()){
-            Sentence sentence = iterator.next();
-            List<Word> words = sentence.getWords();
-            List<SentenceComponent> sentenceComponents = sentence.getComponents();
+        while (iterator.hasNext()) {
+            TextComponent component = iterator.next();
+            if (component instanceof Sentence) {
+                Sentence sentence = (Sentence) component;
+                List<Word> words = sentence.getWords();
+                List<SentenceComponent> sentenceComponents = sentence.getComponents();
 
-            for (Word word : words){
-                if (word.length() == this.length){
-                    int index = sentenceComponents.indexOf(word);
-                    sentenceComponents.set(index, substringComponents.get(0));
+                for (Word word : words) {
+                    if (word.length() == this.length) {
+                        int index = sentenceComponents.indexOf(word);
+                        sentenceComponents.set(index, substringComponents.get(0));
+                    }
                 }
             }
         }

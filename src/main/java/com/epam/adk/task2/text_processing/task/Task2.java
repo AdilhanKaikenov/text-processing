@@ -3,13 +3,14 @@ package com.epam.adk.task2.text_processing.task;
 import com.epam.adk.task2.text_processing.comparators.SorterByNumberOfWords;
 import com.epam.adk.task2.text_processing.entity.Sentence;
 import com.epam.adk.task2.text_processing.entity.Text;
+import com.epam.adk.task2.text_processing.entity.TextComponent;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import com.epam.adk.task2.text_processing.util.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,9 +30,12 @@ public final class Task2 implements Task {
 
         List<Sentence> result = new ArrayList<>();
 
-        Iterator<Sentence> iterator = text.sentenceItr();
-        while (iterator.hasNext()){
-            result.add(iterator.next());
+        TextComponentIterator iterator = new TextComponentIterator(text.clone());
+        while (iterator.hasNext()) {
+            TextComponent component = iterator.next();
+            if (component instanceof Sentence) {
+                result.add((Sentence) component);
+            }
         }
 
         Collections.sort(result, new SorterByNumberOfWords());

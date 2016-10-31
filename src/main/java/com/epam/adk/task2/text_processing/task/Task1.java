@@ -1,14 +1,12 @@
 package com.epam.adk.task2.text_processing.task;
 
-import com.epam.adk.task2.text_processing.entity.Sentence;
-import com.epam.adk.task2.text_processing.entity.Text;
-import com.epam.adk.task2.text_processing.entity.Word;
+import com.epam.adk.task2.text_processing.entity.*;
 import com.epam.adk.task2.text_processing.util.Printer;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,12 +26,14 @@ public final class Task1 implements Task {
 
         List<Sentence> result = new ArrayList<>();
 
-        Iterator<Sentence> iterator = text.sentenceItr();
+        TextComponentIterator iterator = new TextComponentIterator(text.clone());
 
-        while (iterator.hasNext()){
-            Sentence sentence = iterator.next();
-            if (isSameWords(sentence)){
-                result.add(sentence);
+        while (iterator.hasNext()) {
+            TextComponent component = iterator.next();
+            if (component instanceof Sentence) {
+                if (isSameWords((Sentence) component)) {
+                    result.add((Sentence) component);
+                }
             }
         }
         Printer.print(result, true);

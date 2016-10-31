@@ -1,14 +1,12 @@
 package com.epam.adk.task2.text_processing.task;
 
 import com.epam.adk.task2.text_processing.comparators.SorterByAlphabetically;
-import com.epam.adk.task2.text_processing.entity.Sentence;
-import com.epam.adk.task2.text_processing.entity.Text;
-import com.epam.adk.task2.text_processing.entity.Word;
+import com.epam.adk.task2.text_processing.entity.*;
+import com.epam.adk.task2.text_processing.util.TextComponentIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -30,9 +28,13 @@ public final class Task6 implements Task {
 
         List<Word> result = new ArrayList<>();
 
-        Iterator<Sentence> iterator = text.sentenceItr();
-        while (iterator.hasNext()){
-            result.addAll(iterator.next().getWords());
+        TextComponentIterator iterator = new TextComponentIterator(text.clone());
+
+        while (iterator.hasNext()) {
+            TextComponent component = iterator.next();
+            if (component instanceof Sentence) {
+                result.addAll(((Sentence) component).getWords());
+            }
         }
         result.sort(new SorterByAlphabetically());
 
@@ -51,12 +53,12 @@ public final class Task6 implements Task {
         for (int i = 0; i < words.size(); i++) {
 
             // Условие чтобы вначале один раз поставил красную строку
-            if (i == 0){
+            if (i == 0) {
                 sb.append("\t- ");
             }
 
             // Условие для того чтобы поставить точку на последнем слове
-            if ((i == words.size() - 1)){
+            if ((i == words.size() - 1)) {
                 mark = '.';
             }
 

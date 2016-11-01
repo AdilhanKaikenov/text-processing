@@ -12,9 +12,6 @@ import java.util.List;
  */
 public class Sentence extends AbstractTextComposite<SentenceComponent> {
 
-    public Sentence() {
-    }
-
     /**
      * The method returns all the words in the sentence.
      *

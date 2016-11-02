@@ -23,8 +23,8 @@ public final class SorterByNumberOfLetters implements Comparator<Word> {
         Integer num1 = countLetters(wordOne, specificLetter);
         Integer num2 = countLetters(wordTwo, specificLetter);
 
-        Integer i1 = (num1 * 10000) + wordOne.length();
-        Integer i2 = (num2 * 10000) + wordTwo.length();
+        Integer i1 = (num1 * 1000) + wordOne.length();
+        Integer i2 = (num2 * 1000) + wordTwo.length();
 
         if (i1 < i2) {
             return 1;
